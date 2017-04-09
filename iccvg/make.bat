@@ -1,0 +1,13 @@
+del GG-AW_main.pdf
+pdflatex GG-AW_main.tex
+pdflatex GG-AW_main.tex
+del *.toc
+del *.thm
+del *.lot
+del *.lof
+del *.aux
+del *.out
+del *.bbl
+del *.blg
+del *.log
+del *eps-converted-to.pdf

@@ -1,0 +1,15 @@
+del paper.pdf
+latex paper.tex
+latex paper.tex
+latex paper.tex
+dvipdfm paper.dvi
+del *.toc
+del *.thm
+del *.lot
+del *.lof
+del *.aux
+del *.out
+del *.bbl
+del *.blg
+del *.log
+del *eps-converted-to.pdf

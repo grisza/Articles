@@ -1,0 +1,508 @@
+%  LaTeX support: latex@mdpi.com 
+%  In case you need support, please attach all files that are necessary for compiling as well as the log file, and specify the details of your LaTeX setup (which operating system and LaTeX version / tools you are using).
+
+% You need to save the "mdpi.cls" and "mdpi.bst" files into the same folder as this template file.
+
+%=================================================================
+\documentclass[sensors,article,submit,moreauthors,pdftex,10pt,a4paper]{mdpi} 
+%
+%--------------------
+% Class Options:
+%--------------------
+% journal
+%----------
+% Choose between the following MDPI journals:
+% actuators, admsci, aerospace, agriculture, agronomy, algorithms, animals, antibiotics, antibodies, antioxidants, applsci, arts, atmosphere, atoms, axioms, batteries, behavsci, beverages, bioengineering, biology, biomedicines, biomimetics, biomolecules, biosensors, brainsci, buildings, carbon, cancers, catalysts, cells, challenges, chemosensors, children, chromatography, climate, coatings, computation, computers, condensedmatter, cosmetics, cryptography, crystals, data, dentistry, designs, diagnostics, diseases, diversity, econometrics, economies, education, electronics, energies, entropy, environments, epigenomes, fermentation, fibers, fishes, fluids, foods, forests, futureinternet, galaxies, games, gels, genealogy, genes, geosciences, geriatrics, healthcare, horticulturae, humanities, hydrology, informatics, information, infrastructures, inorganics, insects, instruments, ijerph, ijfs, ijms, ijgi, ijtpp, inventions, jcdd, jcm, jdb, jfb, jfmk, jimaging, jof, jintelligence, jlpea, jmse, jpm, jrfm, jsan, land, languages, laws, life, literature, lubricants, machines, magnetochemistry, marinedrugs, materials, mathematics, mca, mti, medsci, medicines, membranes, metabolites, metals, microarrays, micromachines, microorganisms, minerals, molbank, molecules, mps, nanomaterials, ncrna, neonatalscreening, nutrients, particles, pathogens, pharmaceuticals, pharmaceutics, pharmacy, philosophies, photonics, plants, polymers, processes, proteomes, publications, recycling, religions, remotesensing, resources, risks, robotics, safety, scipharm, sensors, separations, sexes, sinusitis, socsci, societies, soils, sports, standards, sustainability, symmetry, systems, technologies, toxics, toxins, tropicalmed, universe, urbansci, vaccines, vetsci, viruses, water
+%---------
+% article
+%---------
+% The default type of manuscript is article, but can be replaced by: 
+% addendum, article, book, bookreview, briefreport, casereport, changes, comment, commentary, communication, conceptpaper, correction, conferenceproceedings, conferencereport, expressionofconcern, meetingreport, creative, datadescriptor, discussion, editorial, essay, erratum, hypothesis, interestingimage, letter, newbookreceived, opinion, obituary, projectreport, reply, retraction, review, preprints, shortnote, supfile, technicalnote
+% supfile = supplementary materials
+%----------
+% submit
+%----------
+% The class option "submit" will be changed to "accept" by the Editorial Office when the paper is accepted. This will only make changes to the frontpage (e.g. the logo of the journal will get visible), the headings, and the copyright information. Also, line numbering will be removed. Journal info and pagination for accepted papers will also be assigned by the Editorial Office.
+%------------------
+% moreauthors
+%------------------
+% If there is only one author the class option oneauthor should be used. Otherwise use the class option moreauthors.
+%---------
+% pdftex
+%---------
+% The option pdftex is for use with pdfLaTeX. If eps figure are used, remove the option pdftex and use LaTeX and dvi2pdf.
+
+%=================================================================
+\firstpage{1} 
+\makeatletter 
+\setcounter{page}{\@firstpage} 
+\makeatother 
+\articlenumber{x}
+\doinum{10.3390/------}
+\pubvolume{xx}
+\pubyear{2016}
+\copyrightyear{2016}
+\externaleditor{Academic Editor: name}
+\history{Received: date; Accepted: date; Published: date}
+
+%------------------------------------------------------------------
+% The following line should be uncommented if the LaTeX file is uploaded to arXiv.org
+%\pdfoutput=1
+
+%=================================================================
+% Add packages and commands here. The following packages are loaded in our class file: fontenc, calc, indentfirst, fancyhdr, graphicx, lastpage, ifthen, lineno, float, amsmath, setspace, enumitem, mathpazo, booktabs, titlesec, etoolbox, amsthm, hyphenat, natbib, hyperref, footmisc, geometry, caption, url, mdframed
+
+\usepackage{amsfonts}
+\usepackage{stmaryrd}
+\usepackage{xspace}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{subcaption}
+
+\usetikzlibrary{patterns}
+\pgfplotsset{compat=1.14}
+\newcommand{\degree}{\ensuremath{{}^{\circ}}\xspace}
+%=================================================================
+%% Please use the following mathematics environments: Theorem, Lemma, Corollary, Proposition, Characterization, Property, Problem, Example, ExamplesandDefinitions, Remark, Definition
+%% For proofs, please use the proof environment (the amsthm package is loaded by the MDPI class).
+
+%=================================================================
+% Full title of the paper (Capitalized)
+\Title{Hybrid Orientation Based Human Limbs Motion Tracking Method}
+
+% If this is an expanded version of a conference paper, please cite it here: enter the full citation of your conference paper, and add $\dagger$ in the end of the title of this article.
+%\conference{}
+
+% Authors, for the paper (add full first names)
+\Author{Grzegorz Glonek $^{1,\dagger,*}$ and Adam Wojciechowski $^{1,\dagger}$}
+% Authors, for metadata in PDF
+\AuthorNames{Grzegorz Glonek and Adam Wojciechowski}
+
+% Affiliations / Addresses (Add [1] after \address if there is only one affiliation.)
+\address{%
+$^{1}$ \quad Institute of Information Technology, Faculty of Technical Physics, Information Technology and Applied Mathematics, Lodz University of Technology, Skorupki 6/8, 90-924 Lodz, Poland}
+
+% Contact information of the corresponding author
+\corres{Correspondence: grzegorz@glonek.net.pl; Tel.: +48-660-758-666}
+
+% Current address and/or shared authorship
+\firstnote{These authors contributed equally to this work.} 
+
+% Simple summary
+%\simplesumm{}
+
+% Abstract (Do not use inserted blank lines, i.e. \\) 
+\abstract{One of the key technologies that lay behind human-machine interaction is limbs motion tracking. To make the interaction effective, the motion tracking must be able to estimate precise and unambiguous position of each tracked human body part and joint. In recent years, motion tracking became very popular and broadly available for home user because of easy access to cheap and robust tracking devices. The paper presents the novel approach of using and data fusion for two of such cheap tracking devices: Microsoft Kinect v.1 and inertial measurement units (IMU). The detailed review of their working characteristics leads to the description of the method of the fusion of data from both devices that compensates their imprecisions. The paper also describes the series of performed experiments that verified the method accuracy. This novel approach allowed improving joints positioning precision up to 18\% in terms of the most relevant methods described in the literature.}
+
+% Keywords
+\keyword{data fusion;Microsoft Kinect;IMU;motion tracking}
+
+% The fields PACS, MSC, and JEL may be left empty or commented out if not applicable
+%\PACS{J0101}
+%\MSC{}
+%\JEL{}
+%\AMS{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Only for the journal Data:
+
+%\dataset{DOI number or link to the deposited data set in cases where the data set is published or set to be published separately. If the data set is submitted and will be published as a supplement to this paper in the journal Data, this field will be filled by the editors of the journal. In this case, please make sure to submit the data set as a supplement when entering your manuscript into our manuscript editorial system.}
+
+%\datasetlicense{license under which the data set is made available (CC0, CC-BY, CC-BY-SA, CC-BY-NC, etc.)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% For Conference Proceedings Papers: add the conference title here
+%\conferencetitle{}
+
+%\setcounter{secnumdepth}{4}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Only for the journal Gels: Please place the Experimental Section after the Conclusions
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{section}{-1} %% Remove this when starting to work on the template.
+\section{How to Use this Template}
+The template details the sections that can be used in a manuscript. Note that the order of article sections may differ from the requirements of the journal (e.g. for the positioning of the Materials and Methods section). Please check the instructions for authors page of the journal to verify the correct order. For any questions, please contact the editorial office of the journal or support@mdpi.com. For LaTeX related questions please contact Janine Daum at latex-support@mdpi.com.
+
+\section{Introduction}
+
+%The introduction should briefly place the study in a broad context and highlight why it is important. It should define the purpose of the work and its significance. The current state of the research field should be reviewed carefully and key publications cited. Please highlight controversial and diverging hypotheses when necessary. Finally, briefly mention the main aim of the work and highlight the principal conclusions. As far as possible, please keep the introduction comprehensible to scientists outside your particular field of research. Citing a journal paper \cite{ref-journal}. And now citing a book reference \cite{ref-book}.
+Human limbs motion tracking can be defined as a process of unambiguous limb’s joints spatial positioning process devoid of significant delays. Nowadays, it might be exploited within several areas, such as entertainment issues, virtual environments interaction or medical rehabilitation treatment. However system precision determines its possible application. \\
+Since 1973 when Gunnar Johanson invented his motion capture system \cite{Johansson1973}, such techniques were available mainly for professionals. However, since 2010, when Microsoft Company released Kinect v.1 controller, motion capture became available to almost everyone. Microsoft Kinect controller is an exemplary implementation of the optical marker-less motion capture system. Though it was designed for and was mainly used in the field of home physical activity games, Kinect became popular subject for many researchers, whose goal was to find other, more advanced scenarios where this controller might be applied \cite{Lange2012, Chang2011}.\\
+Easy access to the motion capture has been additionally supplemented and magnified by the fact that inertial devices such as gyroscopes and accelerometers (IMU – inertial measurement units) have become an integral and mandatory part of current electronic devices. These units are built-in every smartphone device and they are used in various applications like pedometers \cite{Huang2012,Jayalath2013}, screen rotators \cite{Pedley2013} or digital camera orientation detectors.\\
+Inertial measurement units (IMU) are also used as a measuring devices in non-optical inertial human limbs motion tracking systems i.e. XSense \cite{XsensCorp}. Despite IMU, used in products available for home users, are improving continuously, their measurements precision and work limitations can be recognized as blockers for motion capture scenarios that require high accuracy of joints positioning.\\%
+The broad and easy access to mentioned devices became a trigger to work on these controllers data fusion methods that increase the accuracy of joints positioning for many researchers around the world. Bo et al. \cite{Bo2011a} focused on knee joint angle estimation. He proposed accelerometer and gyroscope data fusion, by linear Kalman filter, to calculate the angle and align it to the Kinect’s estimation. Destelle et al. \cite{Destelle2014} have proposed method based mainly on IMU devices. In this method, the shape of skeleton model has been estimated on inertial data only, and sizes of each skeleton bone were set based on Kinect estimation. Also the skeleton placement was defined by selected Kinect’s skeleton joint position. The data from accelerometer, gyroscope and magnetometer were fused by Madgwick’s filter \cite{Madgwick2011}. Kalkbrenner et al. \cite{Kalkbrenner2014} proposed to combine together Madgwick’s filter with linear Kalman filter. In their approach they fused accelerometer and gyroscope data by Madgwick’s filter to estimate selected bones orientation. Basing on this information and the bone length, estimated by Kinect, joints positions were calculated. In the last step joints positions estimated by Kinect were fused with linear Kalman filter with joints positions estimated with IMUs orientations. In the method proposed by Feng and Murray-Smith \cite{Murray-Smith2014} accelerometer data has been fused with Kinect measurement by linear Kalman filter, modified by authors to work with frequency unaligned signals. Tannous et al. \cite{Tannous2016} proposed extended Kalman filter to fuse bones orientations estimated by Kinect and by IMU devices. It is worth mentioning that the majority of data fusion methods, described in the literature, are based on different variants of Kalman filter (linear, extended or unscented variant). It is also noticeable that authors of these methods are selectively taking into consideration characteristics and limitations of measurement devices. \\
+This paper presents the novel approach to Microsoft Kinect and IMU data fusion that systemically makes up for limitations of both measurement devices and compensates their imperfections. Orientation based, human limbs’ joints positions tracking method outperforms state-of-art hybrid systems accuracy by 18\%.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Materials and Methods}
+
+%Materials and Methods should be described with sufficient details to allow others to replicate and build on published results. Please note that publication of your manuscript implicates that you must make all materials, data, computer code, and protocols associated with the publication available to readers. Please disclose at the submission stage any restrictions on the availability of materials or information. New methods and protocols should be described in detail while well-established methods can be briefly described and appropriately cited.
+
+%Research manuscripts reporting large datasets that are deposited in a publicly available database should specify where the data have been deposited and provide the relevant accession numbers. If the accession numbers have not yet been obtained at the time of submission, please state that they will be provided during review. They must be provided prior to publication.
+
+%Interventionary studies involving animals or humans, and other studies require ethical approval must list the authority that provided approval and the corresponding ethical approval code. 
+\subsection{Microsoft Kinect controller characteristics}
+Microsoft Kinect controller might be described as a RGB-D camera. The first version of this device, originally designed for Xbox 360 video game console, was built from two CMOS cameras and integrated infrared (IR) projector. One of these CMOS was responsible for a RGB signal and the second one was calibrated to record IR beam’s view. Considering limbs motion tracking and body gesture recognition, the most crucial part of Microsoft Kinect controller is the chip made by the company PrimeSense. All recognition algorithms, that stand behind Kinect’s motion tracking, were implemented as a firmware of this processing unit. 
+The Microsoft Company has not revealed detailed description of tracking algorithms and key characteristics, so their retrieval became a subject for scientists and hobbyist \cite{Skalski2015,Gonzalez-Jorge2013,Khoshelham2012}. Good understanding of the Kinect controller constraints seems to be indispensable to create an accurate method that fuse its data with data collected from any other source. 
+Official device specification stands that the operation range of Kinect is between $0.8m$ and $4m$ with the field of view $57\degree$ horizontally (Figure \ref{fig:kinect:range:a}) and $43\degree$ vertically (Figure \ref{fig:kinect:range:b}). However, the specification doesn't reveal the possible accuracy of nonlinearity in the working area. Researchers \cite{DiFilippo2015} and hobbyists \cite{stack:kinect2011} reported that operation range is different between device series. Moreover, conducted experiments showed that there are distance measurement nonlinearities within the Kinect’s working area.
+Comparison of fluently changing Kinect-limb’s joints distances, collected simultaneously from Microsoft Kinect controller and Vicon motion capture system, showed that Kinect had tendencies to underestimate the distance in the close range and to overestimate it in the far range. Collected values allowed to define distance estimation error model in a form of 3rd order polynomial as it is presented in equation (\ref{eq:kinect:distanceErrorModel}).
+
+\begin{equation}
+	f(z)=0.02z^3-0.11z^2+0.27z-0.25 
+	\label{eq:kinect:distanceErrorModel}
+\end{equation}
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}[b]{0.4\textwidth}
+		\centering
+		\input{Figure1a.tex}
+		\caption{Horizontal}
+		\label{fig:kinect:range:a}
+	\end{subfigure} \hfill
+	\begin{subfigure}[b]{0.4\textwidth}
+		\centering
+		\input{Figure1b.tex}
+		\caption{Vertical}
+		\label{fig:kinect:range:b}
+	\end{subfigure} \hfill
+	\begin{subfigure}[p]{\textwidth}
+		\hfill
+		\input{Figure1.legend.tex}               
+	\end{subfigure}
+	\caption{Microsoft Kinect v.1 operation range diagram in horizontal (a) and vertical (b) directions}
+	\label{fig:kinect:range}
+\end{figure}   
+
+Figure \ref{fig:kinect:distanceAccuracy} presents the plot of function defined with equation (\ref{eq:kinect:distanceErrorModel}). Analysis of this chart shows that Kinect’s distance estimation is optimal when the user stands about $2m$ from the device ($2m$ – $2.3m$). Outside this distance range, where Kinect works with noticeable error, systematic sensor depth correction should be taken into consideration.
+
+\begin{figure}[H]
+	\centering	
+	\input{Figure2.tex}										
+	\caption{Microsoft Kinect depth measurement accuracy as a function of Kinect-joints distance.}
+	\label{fig:kinect:distanceAccuracy}
+\end{figure}
+
+The reason of such inaccuracy and its tendencies is probably caused by the algorithm used by Kinect controller. Though Microsoft hasn’t revealed any precise technical description of their method for measuring distance between camera and objects at scene, original patent forms, that PrimeSense owned \cite{patent:20100118123,patent:20100020078,patent:20080106746}, combined with independent research results \cite{reichinger2011}, provide some general overview of how this recognition algorithm works. It is known that analysed scene, in front of the Kinect controller, is enlighten with IR light dots structured pattern, which is skew symmetric, so the Kinect can work up or upside down. Then Kinect analysis the IR pattern’s dots distortion, and based on that estimates the subject distance. For the depth map reconstruction, Kinect uses two techniques in parallel: dots blurriness analysis \cite{Fofi2004} and stereo-vision based on a single IR camera and a projector \cite{Rzeszotarski2006}. 
+Achieved depth map is a foundation of a human skeleton estimation algorithm. Depth retrieved human body parts estimations are subsequently classified into body poses by means of machine learning approach: random decision forest algorithms as well as on object detection algorithms, such as the one prosed by Viola-Jones \cite{Shotton2008, Shotton2011a}. 
+As the only source of data, for that estimation process, is IR camera (RGB camera is not used at all), the observed scene must be free of any external source of IR light. This requirement restricts the usage of Kinect in outdoor scenarios. A need for scene isolation, from any IR sources other than Kinect itself, is the reason why Microsoft doesn't recommend using two or more controllers simultaneously. Nevertheless scientists worked out and published methods on combining signals from several Kinect devices \cite{Asteriadis2013, Kitsikidis2011, Schroder2011}.
+It is noticeable that information gathered from the Kinect is uncompleted, due to the lack of information about joints rotation along the bone. This is the result of skeleton model design, where each one of 20 tracked joints is described as a single point.
+The last major flaw of Microsoft Kinect controller are occlusions, which occur when a part of user’s body is covered by another object or is hidden behind any other body part (self-occlusion). The occlusion by an external object seems to be intuitive and doesn't require any additional explanation, but self-occlusions are connected with Kinect’s sensitivity to user’s rotation to the camera ($\alpha$ angle in Figure \ref{fig:kinect:rotationAngle}) - Microsoft recommends operating Kinect in, not precisely defined, the face off pose. Self-performed experiments allowed observing $\alpha$ angle changes while user rotated in front of the camera. Assuming that $P_{Sh_L}$ is the position of left shoulder and $P_{Sh_R}$ is the position of right shoulder, both defined in a Kinect controller coordinating system (limited to $X$ and $Z$ axes in Figure \ref{fig:kinect:rotationAngle}), then $\alpha$ can be calculated according to equation (\ref{eq:kinect:bodyRotationAngle}).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=5cm]{Figure3.png}
+	\caption{Rotation angle $\alpha$ between user and Kinect}
+	\label{fig:kinect:rotationAngle}
+\end{figure}
+
+\begin{equation}
+	\label{eq:kinect:bodyRotationAngle}
+	\begin{split}
+		\alpha &= 
+		\begin{cases} 
+			atan(\frac{|p^K_{{Sh}_R,Z} - p^K_{{Sh}_L,Z}|}{|p^K_{{Sh}_R,X} - p^K_{{Sh}_L,X}|} & , |p^K_{{Sh}_R,X} - p^K_{{Sh}_L,X}| \neq 0 \\
+			\frac{\Pi}{2}                                                                    & , |p^K_{{Sh}_R,X} - p^K_{{Sh}_L,X}| = 0    \\		
+		\end{cases}
+	\end{split}
+\end{equation}
+
+There are two possible strategies that Kinect uses when occlusion happens. Either the device tries to estimate the location of the covered joint or, when it is not able to do even rough estimation of the joint position, Kinect stops tracking such joint. The results of a self-performed experiments show that occlusion occurs when the user is rotated by more than $50\degree$ ($\alpha > 50\degree$). 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=12cm]{Figure4.png}
+	\caption{Shoulders joints tracking state in relation to body rotation angle $\alpha$}
+	\label{fig:kinect:trackingVsAlpha}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=12cm]{Figure5.png}
+	\caption{Elbow angle $\beta$ estimation in relation to body rotation angle $\alpha$}
+	\label{fig:kinect:betaVsAlpha}
+\end{figure}
+
+Charts presented in Figure \ref{fig:kinect:trackingVsAlpha} and Figure \ref{fig:kinect:betaVsAlpha} show measured joints tracking states and elbow angle (angle $\beta$ in Figure \ref{fig:kinect:rotationAngle}) changes during rotation respectively. In Figure \ref{fig:kinect:trackingVsAlpha}  we can see that tracking the states of both shoulders joints fluctuate between \emph{Tracked} and \emph{Interferred} states when subject was rotated more than $50\degree$ in relation to Kinect’s camera. It is worth mentioning that even well visible right shoulder joint lost tracking state during that rotation. In Figure \ref{fig:kinect:betaVsAlpha} we can see that estimation of right elbow angle $\beta$. It was unstable for considerable body rotation ($\alpha > 50\degree$) though the hand was fully visible all the time.
+
+\subsection{IMU characteristics}
+IMU devices have been in professional usage from decades. Within scope of interest there are two types of sensors that measure inertial forces affecting them: accelerometers and gyroscopes. All experiments, presented in this paper, were performed with the usage of IvenSense MPU-6050 module which integrates these both types of inertial devices and thermometer. Even though accelerometer and gyroscope were integrated on a single PCB, their data must be processed individually, as they are affected by the different set of external noises with different frequencies that must be filtered out to make them usable.\\
+An accelerometer is an inertial sensor that measures linear forces, affecting it along device coordinating system axes. Usually, the measurements are defined in relation to gravity force ($1g \approx 9.81  m/{s^2}$) so it is possible to estimate its linear acceleration during the motion. When the device rests the theoretically correct measurement should be $1g$ in upward direction and $0g$ in two other directions. However, due to the external noises (mainly high frequency) resting device measurements are oscillating around theoretical values. Analysis of these oscillations, during calibration, lets design low pass filter that would be able to filter out at least major part of these high frequency noises. Accelerometers are also sensitive to operating temperature changes and its influence, on sensor’s accuracy, was the subject of some researches \cite{Schneider2006, Grigorie1996}. The reason of temperature sensitivity is due to the architecture of the sensor which is built of several capacitors hence the operating temperature has influence on their capacity. During self conducted experiment the measurement of the g-force was observed when the resting device was heated and then cooled down multiple times in the temperature range $10\degree C - 50\degree C$. The result of this experiment is presented in the Figure \ref{fig:imu:tmep}.
+According to the MPU-6050 specification and results of this experiment, the neutral operating temperature for considered module was $25\degree C$. Due to the fact that the operating temperature of IMU device, placed on a human body, rises and stabilizes at approx. $30 \degree C$, some sort of compensation is required there. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=8cm]{Figure6.png}
+	\caption{Accelerometer gravity measurements in temperature range $10\degree C - 50\degree C$}
+	\label{fig:imu:tmep}
+\end{figure}
+
+A gyroscope – the second type of inertial sensors – measures its angular velocity in $deg/s$  units. If the sensor is at the resting state, all measurements should equal 0 for each of 3 axes. However device suffers from long-term bias that should be limited (ideally – removed). Analysed noise has low frequency characteristics, thus appropriate high pass filter, limiting its influence, should be applied. As MEMS based gyroscope is also built from multiple capacitors, their bias is influenced by the temperature as well. As the distortions have low frequency nature, there was no difference observed for high-pass filtered signals over the temperature range. It meant that no additional compensation is required here. 
+The problem with incomplete information is also valid for IMU devices. To calculate accurate orientation of the IMU module, data from accelerometer and gyroscope (orientation around corresponding axes) should be fused together. The accelerometer allows to calculate orientation around two axes, even though it measures forces along all 3 orthogonal directions. The orientation (or the rotation) around the gravity vector is unmeasurable for such device. Theoretically, gyroscope should retrieve orientation measures around all 3 directions, however, even filtered signal, contains some error. Its numerical integration over time results in significant data drift that makes such measurements useless. An example of data drift is presented in Figure \ref{fig:imu:drift}. Despite the sensor remaining motionless during the experiment, the estimations based on the numerically integrated data shows that the sensor rotated about $60\degree$ within 2 minutes.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=8cm]{Figure7.png}
+	\caption{Gyroscope drift for non-moving device}
+	\label{fig:imu:drift}
+\end{figure}
+
+\subsection{Hybrid, orientation based, human limbs motion tracking method}
+The authors’ novel hybrid, orientation based, human limbs motion tracking method, presented in this paper, is based on the continuous linear fusion of skeleton bones orientations (contrary to state-of-art skeleton joints positions fusion) with respect to the current motion context. It takes into consideration controllers’ reliability and compensates measurement devices imperfections described in previous chapters.
+The overall data fusion, implemented in this method, has been split into several phases. Some of them are performed once, while the others are repeated while motion tracking. The subsequent phases are listed below:
+
+\begin{enumerate}[leftmargin=*,labelsep=3mm]
+	\item IMU initialization (performed once).
+	\item IMU data fusion filters initialization (performed once).
+	\item IMU and Kinect controller data noise correction.
+	\item IMU and Kinect synchronization (performed once).
+	\item IMU and Kinect data fusion.
+	\item Joints final position estimation. 
+\end{enumerate}
+
+The main goal of described method is to estimate selected human skeleton joint ($j$) position ($P^F_{j,t} = [p^F_{j,x}, p^F_{j,y}, p^F_{j,z}]_t$) within reference of a three dimensional coordinating system, in a particular moment of time t. Estimation is based on the joint skeleton attached accelerometer measurements ($A=[a_x,a_y,a_z]$), gyroscope measurements ($G=[g_x,g_y,g_z]$), current operational temperature ($T$) of IMU module and position of this joint ($j$) measured by Kinect controller ($P^K_{j,t} = [p^K_{j,x}, p^K_{j,y}, p^K_{j,z}]_t$) as well as the position of the parent joint ($j-1$) in the Kinect’s hierarchical skeleton model ($P^K_{j-1,t} = [p^K_{j,x}, p^K_{j,y}, p^K_{j,z}]_t$). The estimation is performed with some time interval ($\Delta t$) and is defined as function presented in equation \ref{eq:fusion:formula}. The function presented in equation \ref{eq:fusion:formula} relates to each IMU module individually and will need to be executed as many times as many IMU modules are used.
+
+\begin{equation}
+	f(A,G,T,P_{j-1,t}^K,P_{j,t}^K,\Delta t)\implies P_{j,t}^F
+	\label{eq:fusion:formula}
+\end{equation}
+
+\subsubsection{IMU initialization}
+The goal of IMU initialization procedure is to calculate the data ($G, A$) correction factor matrix ($cor = [cor_A \quad cor_G]^T = [[c_ax,c_ay,c_az ]\quad[c_gx,c_gy,c_gz ]]^T $). During this phase, IMU modules must lay down without any motion in face-up position, as this is the position that we know exactly what data to expect ($A_0=[0,0,1]$ for accelerometer and $G_0=[0,0,0]$ for gyroscope). In fact exact reference values are impossible to achieve because of the noise affecting IMU modules, thus the initialization algorithm should work iteratively ($s$ - iteration index) as long as the any element of average measurement error matrix ($[\bar{A}\quad \bar{G}]^T = [[\bar{a_x},\bar{a_y},\bar{a_z}]^T\quad[\bar{g_x},\bar{g_y},\bar{g_z}]^T]^T$) is greater than the element with the same index in error threshold matrix ($[A_{th}\quad G_{th}]^T = [[a_{x,th},a_{y,th},a_{z,th}]^T\quad[g_{x,th},g_{y,th},g_{z,th}]^T]^T $). As a result, the data correction factors matrix ($cor_s$) was calculated to allow gathering the measurements with acceptable accuracy. If we define ideal measurements as ($[A_0\quad G_0]$), ($[A\quad G]_{s,i}$) series on n subsequent sensor’s indications, for s-th iteration, the inertial sensor’s average measurement error is defined by equation \ref{eq:hybrid:IMUCalibration:1} and data correction factor for single measurement is defined by equation \ref{eq:hybrid:IMUCalibration:2}. While $cor_s$ has been calculated, its values are used to correct the influence of static device measurement error in raw accelerometer and gyroscope measurements.
+
+\begin{equation}
+	\begin{bmatrix} \bar{A} \\ \bar{G} \end{bmatrix}_s =
+	\begin{cases}
+		\frac{1}{n}\sum_{i=1}^{n}{\begin{bmatrix}A \\ G\end{bmatrix}_{s,i}} & s = 1\\
+		\frac{1}{n}\sum_{i=1}^{n}{\begin{bmatrix}A \\ G\end{bmatrix}_{s,i} - \begin{bmatrix}cor_A\\ cor_G\end{bmatrix}_{s-1}} &  s > 1
+	\end{cases}
+	\label{eq:hybrid:IMUCalibration:1}
+\end{equation}
+
+\begin{equation}
+	\footnotesize
+	cor_s = \begin{bmatrix}cor_A\\ cor_G\end{bmatrix}_s =
+	\begin{cases}
+		\frac{1}{8}\left(\begin{bmatrix}A_0                                                                          \\ G_0\end{bmatrix} - \begin{bmatrix}\bar{A}\\ \bar{G}\end{bmatrix}_1\right) & s = 1\\
+		cor_{s-1} - diag(1/a_{x,th},1/a_{y,th},1/a_{z,th},1/g_{x,th},1/g_{y,th},1/g_{z,th}) \left(\begin{bmatrix}A_0 \\ G_0\end{bmatrix} - \begin{bmatrix}\bar{A}\\ \bar{G}\end{bmatrix}_1\right) & s > 1
+	\end{cases}
+	\label{eq:hybrid:IMUCalibration:2}
+\end{equation}
+
+
+\subsubsection{IMU data fusion filters initialization}
+As an IMU module inherent data fusion, retrieved both from accelerometer and gyroscope, Madgwick filter \cite{Madgwick2011} has been used. This filter estimates the IMU module orientation in quaternion form ($Q^I$) using accelerometer data ($A$), gyroscope data ($G$) and filtration factor ($f_m$) based on gyroscope drift characteristics in some time interval ($\Delta t$) that measures time between two consecutive filter executions. Filter initialization requires multiple executions, when IMU module is not-moving, with some average accelerometer and gyroscope measurements as well as relatively high value of filtration factor (i.e. $f_m=2$). After completion of the initialization process $f_m$  should be defined according to the average angle random walk value that can be calculated with Allan’s variance. In case of exploited MPU-6050, IMU modules coefficient $f_m = 0.082$. Madgwick’s filter formula is presented with equation \ref{eq:hybrid:madgwick}.
+\begin{equation}
+	Q^I=m(A,G,f_m,\Delta t)
+	\label{eq:hybrid:madgwick}
+\end{equation}
+\subsubsection{IMU and Kinect controller data noise correction}
+Data noise correction is a crucial phase for the data fusion. Its responsibility is to remove as much noise as possible from the raw data. All methods, used in this phase, are related to measurement devices characteristics described earlier in this article.\\
+The first step to improve the IMU module data quality is the accelerometer measurements ($A$) error compensation due to the device operating temperature ($T$). For neutral temperature ($T_0=25\degree C$) and correction factor $f_T= 0.0011$, the correction is defined with equation \ref{eq:hybrid:tempCorrection}. The value of $f_T$ has been estimated in self-conducted experiments.
+
+\begin{equation}
+	A'=A/(1+ f_T (T-T_0))
+	\label{eq:hybrid:tempCorrection}
+\end{equation}
+Low and high pass filtration, of accelerometer and gyroscope data, is a part of Madgwick filter implementation so there is no necessity to repeat that process.
+The second measurement device – Kinect controller – requires two data correction steps that need to be performed as to improve the measurement quality: correction of distance estimation and smoothing the joints position estimations. Distance estimation correction is done by function presented in equation \ref{eq:hybrid:distanceCorrection} which is the opposite of the distance estimation error model (eq. \ref{eq:kinect:distanceErrorModel}). Argument of this function ($z$) is directly taken from the Kinect’s distance estimation API.
+\begin{equation}
+	f(z)=z'=-0.02z^3+0.11z^2-0.27z+0.25
+	\label{eq:hybrid:distanceCorrection}
+\end{equation}
+Smoothing of the Kinect’s joints positions ($P_j^K$) is necessary as coordinates fluctuations may happen, especially when occlusions occur. Then positions of the same joints, in two consecutive frames (measurements), substantially differ, which is physically and anatomically impossible, while refresh rate of the Kinect is 30Hz. Smoothing can be done by Kinect’s firmware, but this approach gives significant delay of the signal interpretation. Alternative approach to smooth positions, which was exploited in the method, was simple low pass filter. Method used 1st order exponential filter to remove unreliable positions estimations defined with equation \ref{eq:hybrid:distanceCorrection} and filtration factor $f_{LPF} = 0.065$.
+\begin{equation}
+	{P'}_{j,t}^K=f_{LPF} * P_{j,t}^K+(1-f_{LPF}) * {P'}_{j,t-1}^K
+	\label{eq:hybrid:distanceCorrection}
+\end{equation}
+
+\subsubsection{IMU and Kinect synchronization}
+Data fusion of any two signals requires signals alignment in time domain. This guarantees fusion of samples that were collected in the same time -- synchronically. The goal of IMU and Kinect signals synchronization is to find the time offset $\tau$ between two data streams. To synchronize both signals, they must have the same frequency so the IMU signal has been down sampled from 100Hz to 30Hz, which is a nominal frequency of Kinect controller. Down sampling has been implemented in the form of decimation where Kinect’s new sample availability defines the time of IMU sample picking. Then the time offset $\tau$ between IMU signal ($I(t)$) and Kinect signal ($K(t)$) was defined as a time offset argument of cross-correlation algorithm that gives the maximum value of correlation between these two signals (variable $\tau_{max}$) (eq. \ref{eq:cross-cor:1} and \ref{eq:cross-cor:2}). The value of $\tau_{max}$ is added to the timestamp of IMU samples to align it to the Kinect’s signal.
+
+\begin{subequations}
+	\begin{align}
+		(I \ast K)(\tau) & = \int_{-\infty}^{+\infty}I(t)K(t+\tau)dt\label{eq:cross-cor:1}   \\
+		\tau_{max}       & = \underset{\tau}{argmax}((I \ast K)(\tau))\label{eq:cross-cor:2} 
+	\end{align}
+	\label{eq:cross-cor}
+\end{subequations}
+
+
+
+\subsubsection{IMU and Kinect data fusion}
+The data fusion process worked on time aligned filtered data and took into consideration their reliability. The most serious concerns about the quality of data used within fusion were related to the data provided by Microsoft Kinect controller. Decision about Kinect’s data quality was based on the joints tracking state combined together with their positions estimation noise level, the current value of angle $\alpha$ between the user and the camera that cannot exceed $50\degree$ with the angle measurement variance lower than $1.5\degree$, and information about tracking state of both shoulder joints. If all these conditions were satisfied, signals were fused according to equation \ref{eq:hybrid:reliableFusion}. The novelty of the presented method, in comparison with literature approaches, is that the fused data represent skeleton bones orientations in the form of Euler angles $E = \begin{bmatrix} \phi &  \theta & \psi \end{bmatrix}$, instead of joints resulting positions. Orientation of the bones is estimated from both sources and is represented in form of quaternions. They must be converted to the form of Euler angles before they can be fused. The conversion from quaternion to Euler angles form can be found in \cite{Dunn2011}.
+
+\begin{equation} E^F_t = 
+	\begin{bmatrix}  \phi^F \\  \theta^F \\  \psi^F \end{bmatrix}_t = 
+	diag(w_\phi,w_\theta,w_\psi)
+	\begin{bmatrix}  \phi^I \\  \theta^I \\  \psi^I \end{bmatrix}_t + 
+	diag(1-w_\phi,1-w_\theta,1-w_\psi)
+	\begin{bmatrix}  \phi^K \\  \theta^K \\  \psi^K \end{bmatrix}_t
+	\label{eq:hybrid:reliableFusion}
+\end{equation}
+
+The originally elaborated weights $[w_\phi , w_\theta , w_\psi]$ describe the importance level of IMU measurements. They were based both on the device precision and data completeness, and were defined as $[0.98, 0.05, 0.65]$ respectively. 
+If Kinect’s data turned out to be unreliable, they cannot be fused with the IMU data. Averaged bones orientation are then estimated based on the previous fused estimation and current change of IMU orientation, according to equation \ref{eq:hybrid:unreliableFusion}.
+
+
+\begin{equation} 
+	\label{eq:hybrid:unreliableFusion}
+	E^F_t = 
+	\begin{bmatrix}  \phi^F \\  \theta^F \\  \psi^F \end{bmatrix}_t = 
+	\begin{bmatrix}  \phi^F \\  \theta^F \\  \psi^F \end{bmatrix}_{t-1} +
+	diag(w_\phi,w_\theta,w_\psi)\
+	(\begin{bmatrix}  \phi^I \\  \theta^I \\  \psi^I \end{bmatrix}_t -
+	\begin{bmatrix}  \phi^I \\  \theta^I \\  \psi^I \end{bmatrix}_{t-1})
+\end{equation}
+
+However, in case of Kinect data unreliability, weights $[w_\phi , w_\theta , w_\psi]$ were defined differently. In equation \ref{eq:hybrid:unreliableFusion} these weights were defined as $$[0.98,(1-t_{noise}/10)*0.65,(1-t_{noise}/10)*0.65]$$. $t_{noise}$ coefficient defines the time, in seconds, that Kinect stayed unreliable and its maximum accepted value was defined to 10s. After this time, estimation of the new bone orientation (only around two axes) stops, until Kinect is available again and the method privileges the IMU signal.
+
+\subsubsection{Joints final position estimation}
+Final joint position ($P_{j,t}^F$) estimation requires the information regarding the position of joint’s parent in the hierarchical skeleton model ($P_{j-1,t}^F$), fixed length of the bone between current joint and its parent ($l$) and the bone orientation estimation ($E_t^F=[\phi^F,\theta^F,\psi^F]_t$). As a result of data fusion, estimated orientations were presented in the form of Euler angles. However, this form of orientation representation may complicate further calculations. To simplify these calculations, conversion from Euler angles to quaternion $Q_t^F$, according to the formula described in \cite{Dunn2011} is required. It is worth noticing that $Q_t^F$ represents orientation relative to the initial T-Pose defined at the beginning of motion sequence. At the last step, the bone in the current orientation must be aligned to the position of parent joint. This final joint position calculation procedure is described with equation \ref{eq:hybrid:positionCalculationForm}.
+
+\begin{equation} 	
+	P_{j,t}^F=P_{j-1,t}^F+Q_t^F*[l,0,0]*{Q_t^F}^{-1}     
+	\label{eq:hybrid:positionCalculationForm}              	
+\end{equation}
+
+Subsequent limbs’ joints estimation requires consecutive hierarchical analysis of skeleton joints and corresponding bones.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Results}
+
+%This section may be divided by subheadings. It should provide a concise and precise description of the experimental results, their interpretation as well as the experimental conclusions that can be drawn.
+
+In order to verify the accuracy of elaborated method, several experiments were performed. They were conducted with the VICON motion capture system, as a source of ground-truth reference data. For 3 subjects hand movements were monitored, being tracked simultaneously with Kinect controller, two IMUs attached to hand arm and forearm bones, as well as VICON tracking system. Each user had to perform 4 exercises, each of them twice with 5 repetitions per single try. Each try started with devices synchronization in the T-Pose and then 5 repetitions of motion began. Exercises focused on horizontal and vertical hand flexion in elbow joint, horizontal arm motion in shoulder and keeping straight arm in T-pose without motion for at least 60s. All these exercises schemes are presented in figure \ref{fig:results:sequences}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=12cm]{Figure8.png}
+	\caption{Movement sequences performed during tests}
+	\label{fig:results:sequences}
+\end{figure}
+
+The accuracy of 3 parameters estimations has been observed: the position of elbow joint, the position of wrist joint and the angle between arm and forearm measured in elbow joint. Those values have been compared with the corresponding parameters estimated with Kalkbrenner’s method \cite{Kalkbrenner2014} which, on the contrary, fused positions rather than orientations, of selected joints. The position astimation error has been defined as root mean squared error ($RMSE$) of Euclidean distance ($d_e$) between joint’s reference posistion measured by VICON motion capture system ($P_j^V$) and joint’s position estimated by Kalkbrenner method ($P_j^{FP}$) or between joint’s position estimated by authors’ orientation-based fusion method ($P_j^{FO}$). The $RMSE$ value has been calculated with equation \ref{eq:results:RMSE} \cite{Armstrong1992}. The error for elbow joint angle $\alpha$ estimation has been calculated in the similar way.
+
+\begin{equation}
+	\centering
+	{RMSE}^F_j = \sqrt{\frac{1}{n}\sum_{i=1}^{n}{d_e(P^V_{j,i}, P^F_{j,i})^2}}
+	\label{eq:results:RMSE}
+\end{equation}
+
+The overall error of both methods for each test exercise has been calculated as a mean of $RMSE$ ($\overline{RMSE}$) of each motion tracking session. To compare the Kalkbrenner’s method with authors’ novel method the ratio $r$ between the difference of $\overline{RMSE}$ of both methods to the $\overline{RMSE}$ of Kalkbrenner’s method has been calculated according to the equation \ref{eq:results:comparison} and expressed in the form of percents. The figures \ref{fig:results:positionError:a} and \ref{fig:results:positionError:b} show the summary of  $\overline{RMSE}$ for tracked upper limb joints: elbow and wrist. Above each pair of bars in these charts, the value of $r$ ratio has been presented. Based on the results presented in figures \ref{fig:results:positionError:a} and \ref{fig:results:positionError:b} the improvement of proposed method in reference to the best in literature - Kalkbrenner’s method – by up to 18\% for elbow joint position estimation and up to 16\% for wrist joint position estimation. Figure \ref{fig:results:elbowAngleError} presents the chart of $\overline{RMSE}$ of elbow angle $\beta$ estimation (calculated similarly to eq. \ref{eq:results:RMSE}). In this value estimation the improvement has been also noticed by up to 11\%.
+
+\begin{equation}
+	r = \frac{\overline{RMSE^P_j} - \overline{RMSE^O_j}}{\overline{RMSE^P_j}}
+	\label{eq:results:comparison}
+\end{equation}
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\input{Figure9a.tex}
+		\caption{Elbow}
+		\label{fig:results:positionError:a}
+	\end{subfigure} \hfill
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\input{Figure9b.tex}
+		\caption{Wrist}
+		\label{fig:results:positionError:b}
+	\end{subfigure}
+	\caption{Average root square mean error $\overline{RMSE}$ of elbow (a) and wrist (b) joints position estimation}
+	\label{fig:results:positionError}
+\end{figure}   
+
+\begin{figure}[H]
+	\centering
+	\input{Figure10.tex}
+	\caption{Average root square mean error $\overline{RMSE}$ of elbow flexion angle $\beta$}
+	\label{fig:results:elbowAngleError}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Discussion}
+
+%Authors should discuss the results and how they can be interpreted in perspective of previous studies and of the working hypotheses. The findings and their implications should be discussed in the broadest context possible. Future research directions may also be highlighted.
+The presented results show the comparison of estimation errors of two data fusion methods: the well-known method based on joints position fusion and a new data fusion method based on bones orientations. 3 factors estimated by both methods have been taken into consideration in this comparison: the error of elbow joint position estimation, the error of wrist joint position estimation and the error of the estimation of angle between the arm and the forearm of the tracked hand. The motions used to test these methods have been chosen to check how methods work when source data are poor quality due to the limitations and imperfections of measurement devices.
+The results of the comaprison of the error of elbow and wrist joints positions estimations are presented in figures \ref{fig:results:positionError:a} and \ref{fig:results:positionError:b} respectively. Charts present that the author’s novel data fusion method reduces the joints position estimation error, especially during motions that emphasize the imperfections of Microsoft Kinect device (exercises 2 and 3). In these motions the most significant improvement in estimation error has been noticed - up to 18\% for the elbow position esitmation and up to 16\% for the wrist position estimation. In two other motions, the improvement has been noticed as well, however it was slightly less substantial than in the exercises 2 and 3. This shows that the proposed orientation-based data fusion method is able to detect the poor Kinect data quality faster than the method proposed by Kalkbrenner et al. and roduce the influence of these data on the final result. 
+Figure \ref{fig:results:elbowAngleError} shows the results of the elbow angle estimation during the motion. In this factor, the estimation error reduction has been noticed as well, and the best result was close to 11\%. However, in exercises 2 and 3, which might be considered as the most difficult from the data quality detection point of view, the improvement is slighter than in the case of joints position estimation. That means that both methods have similar accuracy of estimation of the body/limbs shape, however, the authors’ method is more accurate in the joints position estimation. The most possible explanation for this, is the fact that the authors’ method uses the fixed bones lenght definition,while the Kalkbrenner’s method uses the Kinect’s bone lenght temporary estimation that may vary between subsequent measurement frames.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusions}
+
+%This section is not mandatory, but can be added to the manuscript if the discussion is unusually long or complex.
+
+The authors presented a new, orientation-based method for skeleton joints positioning, that compensates devices' imperfections and consideres the context of the motion. It was tested on a variety of right hand movements and results were compared with those gathered from the position-based fusion method and the reference, professional, ground-truth Vicon tracking system. With the results achieved from the experiments, one can notice the improvement of the elbow positioning accuracy up to 18\%, the wrist positioning up to 16\% and the elbow joint angle estimation accuracy up to 11\%.
+Obtained results prove that the novel data fusion approach, based on the bones orientation, might be considered as an improved alternative to the well-known, joint position-based methods and it is worth continuing the research in this subject.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{6pt} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% optional
+%\supplementary{The following are available online at www.mdpi.com/link, Figure S1: title, Table S1: title, Video S1: title.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\acknowledgments{All sources of funding of the study should be disclosed. Please clearly indicate grants that you have received in support of your research work. Clearly state if you received funds for covering the costs to publish in open access.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\authorcontributions{G. Glonek designed the method and experiments and analyzed the data; A.Wojciechowski contributed and supervised the work; G. Glonek and A. Wojciechowski wrote the paper.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\conflictofinterests{The authors declare no conflict of interest.} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% optional
+\abbreviations{The following abbreviations are used in this manuscript:\\
+				
+	\noindent 
+	\begin{tabular}{@{}ll}
+		RMSE & Root Mean Squared Error    \\
+		IMU  & Inertial Measurement Units \\
+		LPF  & Low Pass Filter            \\
+	\end{tabular}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% optional
+%\appendixtitles{no} %Leave argument "no" if all appendix headings stay EMPTY (then no dot is printed after "Appendix A"). If the appendix sections contain a heading then change the argument to "yes".
+%\appendixsections{multiple} %Leave argument "multiple" if there are multiple sections. Then a counter is printed ("Appendix A?). If there is only one appendix section then change the argument to ?one? and no counter is printed (?Appendix?).
+%\appendix
+%\section{}
+%The appendix is an optional section that can contain details and data supplemental to the main text. For example, explanations of experimental details that would disrupt the flow of the main text, but nonetheless remain crucial to understanding and reproducing the research shown; figures of replicates for experiments of which representative data is shown in the main text can be added here if brief, or as Supplementary data. Mathemtaical proofs of results not central to the paper can be added as an appendix.
+
+%\section{}
+%All appendix sections must be cited in the main text. In the appendixes, Figures, Tables, etc. should be labeled starting with `A', e.g., Figure A1, Figure A2, etc. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Citations and References in Supplementary files are permitted provided that they also appear in the reference list here. 
+\bibliographystyle{mdpi}
+
+%=====================================
+% References, variant A: internal bibliography
+%=====================================
+%\renewcommand\bibname{References}
+%\begin{thebibliography}{999}
+% Reference 1
+%\bibitem{ref-journal}
+%Lastname, F.; Author, T. The title of the cited article. {\em Journal Abbreviation} {\bf 2008}, {\em 10}, 142-149.
+% Reference 2
+%\bibitem{ref-book}
+%Lastname, F.F.; Author, T. The title of the cited contribution. In {\em The Book Title}; Editor, F., Meditor, A., Eds.; Publishing House: City, Country, 2007; pp. 32-58.
+%\end{thebibliography}
+
+%=====================================
+% References, variant B: external bibliography
+%=====================================
+\bibliography{main}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% optional
+%\sampleavailability{Samples of the compounds ...... are available from the authors.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+

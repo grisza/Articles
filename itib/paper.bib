@@ -1,0 +1,99 @@
+@article{Bo2011a,
+abstract = {In this paper, we explore the combined use of inertial sensors and the Kinect for applications on rehabilitation robotics and assistive devices. In view of the deficiencies of each individual system, a new method based on Kalman filtering was developed in order to perform online calibration of sensor errors automatically whenever measurements from Kinect are available. The method was evaluated on experiments involving healthy subjects performing multiple DOF tasks.},
+author = {Bo, Antonio Padilha Lanari and Hayashibe, Mitsuhiro and Poignet, Philippe},
+doi = {10.1109/IEMBS.2011.6090940},
+file = {:C$\backslash$:/Users/grzeg/Documents/Mendeley Desktop/2011/Proceedings of the Annual International Conference of the IEEE Engineering in Medicine and Biology Society, EMBS/2011 - Bo, Hayashibe, Poignet - Joint angle estimation in rehabilitation with inertial sen.pdf:pdf;:C$\backslash$:/Users/grzeg/Documents/Mendeley Desktop/2011/Proceedings of the Annual International Conference of the IEEE Engineering in Medicine and Biology Society, EMBS/2011 - Bo, Hayashibe, Poignet - Joint angle estimation in rehabilitation with inertial (2).pdf:pdf},
+isbn = {9781424441211},
+issn = {1557170X},
+journal = {Proc. Annu. Int. Conf. IEEE Eng. Med. Biol. Soc. EMBS},
+keywords = {Calibration,Joints,Joints: physiology,Robotics},
+mendeley-groups = {Nui review,Fusion,State of art},
+month = {jan},
+pages = {3479--3483},
+pmid = {22255089},
+title = {{Joint angle estimation in rehabilitation with inertial sensors and its integration with Kinect}},
+url = {http://www.ncbi.nlm.nih.gov/pubmed/22255089},
+volume = {2011},
+year = {2011}
+}
+
+@inproceedings{Destelle2014,
+abstract = {In this paper, we present a novel multi-sensor fusion method to build a human skeleton. We propose to fuse the joint position information obtained from the popular Kinect sensor with more precise estimation of body segment orientations provided by a small number of wearable inertial sensors. The use of inertial sensors can help to address many of the well known limitations of the Kinect sensor. The precise calculation of joint angles potentially allows the quantification of movement errors in technique training, thus facilitating the use of the low-cost Kinect sensor for accurate biomechanical purposes e.g. the improved human skeleton could be used in visual feedback-guided motor learning, for example. We compare our system to the gold standard Vicon optical motion capture system, proving that the fused skeleton achieves a very high level of accuracy.},
+address = {Lisbon},
+author = {Destelle, F. and Ahmadi, A. and O'Connor, N.E. and Moran, K. and Chatzitofis, A. and Zarpalas, D. and Daras, P.},
+booktitle = {Eur. signal Process. Conf.},
+file = {:C$\backslash$:/Users/grzeg/Documents/Mendeley Desktop/2014/Europian signal Processing Conference/2014 - Destelle et al. - Low-cost accurate skeleton tracking based on fusion of kinect and wearable inertial sensors.pdf:pdf},
+keywords = {Biomechanics,Bones,Inertial sensor,Joints,Kinect,Kinect sensor,Knee,Motion capture,Multi-sensor fusion,Sensor fusion,Skeleton tracking,biomechanical purposes,biomechanics,body segment orientations,bone,gold standard Vicon optical motion capture system,human skeleton,joint position information,low-cost accurate skeleton tracking,motion estimation,movement errors,multisensor fusion,orthopaedics,sensor fusion,technique training,visual feedback-guided motor learning,wearable inertial sensors},
+mendeley-groups = {Fusion,State of art},
+pages = {371--375},
+title = {{Low-cost accurate skeleton tracking based on fusion of kinect and wearable inertial sensors}},
+year = {2014}
+}
+
+@article{Madgwick2010,
+abstract = {Abstract This report presents a novel orientation filter applicable to IMUs consisting of tri-axis gyroscopes and accelerometers, and MARG sensor arrays that also include tri-axis magnetometers. The MARG implementation incorporates magnetic distortion and gyroscope bias drift compensation. The filter uses a quaternion representation, allowing accelerometer and magnetometer data to be used in an analytically derived and optimised gradient-descent algorithm to compute the direction of the gyroscope measurement error as a quaternion derivative. The benefits of the filter include: (1) computationally inexpensive; requiring 109 (IMU) or 277 (MARG) scalar arithmetic operations each filter update, (2) effective at low sampling rates; e.g. 10 Hz, and (3) contains 1 (IMU) or 2 (MARG) adjustable parameters defined by observable system characteristics. Performance was evaluated empirically using a commercially available orientation sensor and reference measurements of orientation obtained using an optical measurement system. A simple calibration method is presented for the use of the optical measurement equipment in this application. Performance was also benchmarked against the propriety Kalman-based algorithm of orientation sensor. Results indicate the filter achieves levels of accuracy exceeding that of the Kalman-based algorithm; < 0.6◦ static RMS error, < 0.8◦ dynamic RMS error. The implications of the low computational load and ability to operate at low sampling rates open new opportunities for the use of IMU and MARG sensor arrays in real-time applications of limited power or processing resources or applications that demand extremely high sampling rates.},
+author = {Madgwick, S.O.H.},
+doi = {10.1109/ICORR.2011.5975346},
+file = {:C$\backslash$:/Users/grzeg/Documents/Mendeley Desktop/2010/Report x-io and University of {\ldots}/2010 - Madgwick - An efficient orientation filter for inertial and inertialmagnetic sensor arrays.pdf:pdf},
+isbn = {9781424498628},
+issn = {1945-7901},
+journal = {Rep. x-io Univ. {\ldots}},
+mendeley-groups = {Filters},
+pages = {32},
+pmid = {22275550},
+title = {{An efficient orientation filter for inertial and inertial/magnetic sensor arrays}},
+url = {http://sharenet-wii-motion-trac.googlecode.com/files/An{\_}efficient{\_}orientation{\_}filter{\_}for{\_}inertial{\_}and{\_}inertialmagnetic{\_}sensor{\_}arrays.pdf},
+year = {2010}
+}
+
+@article{Murray-Smith2014,
+abstract = {This paper presents a sensor fusion approach to fusing Microsoft Kinect sensor and the built-in inertial sensors in a mobile device. A multi-rate Kalman filter is designed and applied for fusing the low-sampling-rate (30Hz) uncertain positions sensed by the Kinect sensor and the high-sampling-rate (90Hz) accelerations measured by the inertial sensors. These sensors have complementary properties. The Kinect can be applied for skeleton tracking, which gives the joints' positions. Meanwhile, the built-in inertial sensors in the mobile device sense the hand motion and the acceleration can be estimated through inertial sensor fusion. Firstly, convert the acceleration estimated with inertial sensors from the body frame into the Kinect coordinate system. Experimental results show that the hand accelerations estimated with the Kinect sensor and the inertial sensors are comparable. Secondly, design and apply a multi-rate Kalman filter for sensor fusion. The sensor fusion helps improve the accuracy of the system state estimation including the position, the velocity and the acceleration. This is of great benefit for combining inertial sensors and the external position sensing device for indoor augmented reality (AR) and other location-aware sensing applications.},
+author = {Feng, Shimin and Murray-Smith, Roderick},
+doi = {10.1049/cp.2014.0527},
+file = {:C$\backslash$:/Users/grzeg/Documents/Mendeley Desktop/2014/IET Conference on Data Fusion {\&} Target Tracking 2014 Algorithms and Applications/2014 - Feng, Murray-Smith - Fusing Kinect Sensor and Inertial Sensors with Multi-rate Kalman Filter.pdf:pdf},
+isbn = {978-1-84919-863-9},
+journal = {IET Conf. Data Fusion Target Track. 2014 Algorithms Appl.},
+mendeley-groups = {State of art},
+pages = {2.3--2.3},
+title = {{Fusing Kinect Sensor and Inertial Sensors with Multi-rate Kalman Filter}},
+url = {http://digital-library.theiet.org/content/conferences/10.1049/cp.2014.0527},
+year = {2014}
+}
+
+@inproceedings{Kalkbrenner2014,
+abstract = {Motion Analysis, Inertial Measurement Unit, IMU, Motion Tracking, Kinect, Data Fusion, Kalman Filter. This paper presents an approach for the tracking of limb movements using orientation information acquired from Inertial Measurement Units (IMUs) and optical information from a Kinect sensor. A new algorithm that uses a Kalman filter to fuse the Kinect and IMU data is presented. By fusing optical and orientation information we are able to track the movement of limb joints precisely, and almost drift-free. First, the IMU data is processed using the gradient descent algorithm proposed in (Madgwick et al., 2011) which calculates the orientation information of the IMU using acceleration and velocity data. Measurements made with IMUs tend to drift over time, so in a second stage we compensate for the drift using absolute position information obtained from a Microsoft Kinect sensor. The fusion of sensor data also allows to compensate for faulty or missing measurements. We have carried out some initial experiments on arm tracking. The first results show that our technique for data fusion has the potential to be used to record common medical exercises for clinical movement analysis.},
+author = {Kalkbrenner, Christoph and Hacker, Steffen and Algorri, Maria-elena and Blechschmidt-trapp, Ronald},
+booktitle = {Proc. Int. Conf. Biomed. Electron. Devices},
+doi = {10.5220/0004787601200126},
+file = {:C$\backslash$:/Users/grzeg/Documents/Mendeley Desktop/2014/Proceedings of the International Conference on Biomedical Electronics and Devices/2014 - Kalkbrenner et al. - Motion Capturing with Inertial Measurement Units and Kinect - Tracking of Limb Movement using.pdf:pdf},
+isbn = {978-989-758-013-0},
+keywords = {Data Fusion,IMU,Inertial Measurement Unit,Kalman Filter,Kinect,Motion Analysis,Motion Tracking},
+mendeley-groups = {Fusion,State of art},
+pages = {120--126},
+title = {{Motion Capturing with Inertial Measurement Units and Kinect - Tracking of Limb Movement using Optical and Orientation Information}},
+url = {http://www.scitepress.org/DigitalLibrary/Link.aspx?doi=10.5220/0004787601200126},
+year = {2014}
+}
+
+@article{Helten2013,
+abstract = {In recent years, the availability of inexpensive depth cameras, such $\backslash$nas the Microsoft Kinect, has boosted the research in monocular full body $\backslash$nskeletal pose tracking. Unfortunately, existing trackers often fail to capture $\backslash$nposes where a single camera provides insufficient data, such as non-frontal $\backslash$nposes, and all other poses with body part occlusions. In this paper, we present $\backslash$na novel sensor fusion approach for real-time full body tracking that succeeds in $\backslash$nsuch difficult situations. It takes inspiration from previous tracking $\backslash$nsolutions, and combines a generative tracker and a discriminative tracker $\backslash$nretrieving closest poses in a database. In contrast to previous work, both $\backslash$ntrackers employ data from a low number of inexpensive body-worn inertial $\backslash$nsensors. These sensors provide reliable and complementary information when the $\backslash$nmonocular depth information alone is not sufficient. We also contribute by new $\backslash$nalgorithmic solutions to best fuse depth and inertial data in both trackers. One $\backslash$nis a new visibility model to determine global body pose, occlusions and usable $\backslash$ndepth correspondences and to decide what data modality to use for discriminative $\backslash$ntracking. We also contribute with a new inertial-based pose retrieval, and an $\backslash$nadapted late fusion step to calculate the final body pose.},
+author = {Helten, Thomas and Muller, Meinard and Seidel, Hans Peter and Theobalt, Christian},
+doi = {10.1109/ICCV.2013.141},
+file = {:C$\backslash$:/Users/grzeg/Documents/Mendeley Desktop/2013/Proceedings of the IEEE International Conference on Computer Vision/2013 - Helten et al. - Real-time body tracking with one depth camera and inertial sensors.pdf:pdf},
+isbn = {9781479928392},
+issn = {1550-5499},
+journal = {Proc. IEEE Int. Conf. Comput. Vis.},
+keywords = {Depth tracking,inertial sensors,real-time,sensor fusion},
+mendeley-groups = {Fusion,State of art},
+pages = {1105--1112},
+title = {{Real-time body tracking with one depth camera and inertial sensors}},
+year = {2013}
+}
+
+@InBook{Corriou2013,
+author = {Jean-Pierre Corriou},
+title = {Process Control: Theory and Applications},
+chapter = {9.3.1 First-Order Filter},
+publisher = {Springer Science & Business Media},
+year = {2013}
+}
