@@ -1,0 +1,39 @@
+\begin{tikzpicture} [		
+		auto,
+		start/.style = {ellipse,fill=black!30, minimum height=2em},
+		decision/.style = { diamond, draw=black, thick, fill=black!20,
+			text width=5em, text badly centered,
+			inner sep=1pt, rounded corners },
+		block/.style    = { rectangle, draw=black, thick, 
+			fill=black!20, text width=13em, text centered,
+			rounded corners, minimum height=2em },
+		line/.style     = { draw, thick, ->, shorten >=2pt },
+	]
+	% Define nodes in a~matrix
+	\begin{scope} 
+		\node [start] (start) {Start};
+		\node [block, below=of start] (block1) {IMU initialization};
+		\node [block, below=of block1] (block2) {IMU data fusion filters initialization}; 
+		\node [block, below=of block2] (block7) {Data read\\IMU and Kinect controller data noise correction}; 
+		\node [above=of block7, below, yshift=-0.5cm](null1) {};  					
+		\node [decision, below=of block7] (inSync) {Is data in sync?}; 
+		\node [block, below=of inSync, xshift=3.5cm, yshift=1.2cm] (block4) {IMU and Kinect synchronization}; 
+		\node [block, below=of inSync, xshift=-3.5cm, yshift=1.2cm] (block5) {IMU and Kinect data fusion}; 
+		\node [block, below=of inSync, yshift=-1.3cm] (block6) {Joints final position estimation};    
+		\node [decision, below=of block6] (isEnd) {Is user finished session?}; 
+		\node [start, left=of isEnd] (stop) {Stop};
+	\end{scope}
+	% connect all nodes defined above
+	\begin{scope} [every path/.style=line]
+		\path (start)        --    (block1);
+		\path (block1)        --    (block2);
+		\path (block2)      -- (block7) --  (inSync);
+		\path (inSync)  --++  (-3,0) node [near start, above] {Yes} -| (block5.north);
+		\path (inSync)  --++  (3,0) node [near start, above] {No} -| (block4.north);
+		\path (block5.south)   --++  (0,-1) node {}  -|    (block6.north);
+		\path (block4.west) |- (block5.east);
+		\path (block6) -- (isEnd);
+		\path (isEnd.east)      --++  (7,0) node [near start, above] {No} |-  (null1);
+		\path (isEnd.west) --++  (-1,0) node [near start, above] {Yes} -- (stop.east);
+	\end{scope}			
+\end{tikzpicture}
