@@ -164,7 +164,7 @@ A comparison of fluently changing distances between Kinect and limbs' joints, co
 \end{equation}
 
 \begin{equation}
-\begin{split}
+	\begin{split}
 		X^TXA &= X^TY => \begin{bmatrix}
 		x_1^0&x_1^1&x_1^2&x_1^3\\
 		x_2^0&x_2^1&x_2^2&x_2^3\\
@@ -194,7 +194,7 @@ A comparison of fluently changing distances between Kinect and limbs' joints, co
 			y_0 \\y_1\\y_2\\\dots\\y_n
 		\end{bmatrix} 
 	\end{split}
-\label{eq:characteristics:kinect:distanceAccuracyPoly}
+	\label{eq:characteristics:kinect:distanceAccuracyPoly}
 \end{equation}
 
 \begin{figure}[H]
@@ -233,118 +233,118 @@ Such inaccuracy and its tendencies are probably caused by the algorithm implemen
 As the only source of data for that estimation process is an IR camera (RGB camera is not used at all), the observed scene must be free of any external source of the IR light. This requirement restricts the usage of Kinect in outdoor scenarios. A need for the scene isolation from any IR sources other than the Kinect itself, is the main reason why Microsoft does not recommend using two or more controllers simultaneously. Nevertheless, scientists invented and published methods on combining signals from several Kinect devices \cite{Asteriadis2013,Kitsikidis2011,Schroder2011}. It is noticeable that information gathered from the Kinect is uncomplete, due to the lack of information about joints rotation along the bone. This is the result of the skeleton model design, where each of 20 tracked joints is described as a single point.
 
 The last major flaw of Microsoft Kinect controller is occlusion, which occurs when a part of user’s body is covered by another object or is hidden behind any other body part (self-occlusion). The occlusion by an external object seems obvious and does not require any additional explanation, however self-occlusions are less intuitive. They are connected with Kinect’s sensitivity to user’s rotation to the camera ($\alpha$ angle in fig. \ref{fig:kinect:rotationAngle}), as Microsoft recommends working with Kinect in the face off pose, which is not precisely defined. Self-performed experiments allowed observing $\alpha$ angle changes while user rotated in front of the camera. Assuming that $P_{Sh_L} = [p^K_{{Sh}_L,X} , p^K_{{Sh}_L,Z}]$ is the position of the left shoulder and $P_{Sh_R} = [p^K_{{Sh}_R,X} , p^K_{{Sh}_R,Z}$ is the position of the right shoulder, both defined in a Kinect controller coordinating system (limited to $X$ and $Z$ axes in fig. \ref{fig:kinect:rotationAngle}), then $\alpha$ can be calculated according to eq. \ref{eq:kinect:bodyRotationAngle}.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=5cm]{Figure3.png}
-	\caption{Rotation angle $\alpha$ between the user and Kinect}
-	\label{fig:kinect:rotationAngle}
-\end{figure}
-
-\begin{equation}
-	\label{eq:kinect:bodyRotationAngle}
-	\begin{split}
-		\alpha &= 
-		\begin{cases} 
-			atan(\frac{|p^K_{{Sh}_R,Z} - p^K_{{Sh}_L,Z}|}{|p^K_{{Sh}_R,X} - p^K_{{Sh}_L,X}|} & , |p^K_{{Sh}_R,X} - p^K_{{Sh}_L,X}| \neq 0 \\
-			\frac{\Pi}{2}                                                                    & , |p^K_{{Sh}_R,X} - p^K_{{Sh}_L,X}| = 0    \\		
-		\end{cases}
-	\end{split}
-\end{equation}
-
-There are two possible strategies that Kinect uses when the occlusion happens. Either the device tries to estimate the location of the covered joint or, when it is not able to perform even rough estimation of the joint position, it stops tracking of such joint. The results of self-performed experiments show that considerable occlusions occur when the user is rotated by more than $50\degree$ ($\alpha > 50\degree$). 
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=12cm]{Figure4.png}
-	\caption{Shoulders joints tracking state in relation to body rotation angle $\alpha$}
-	\label{fig:kinect:trackingVsAlpha}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=12cm]{Figure5.png}
-	\caption{Elbow angle $\beta$ estimation in relation to body rotation angle $\alpha$}
-	\label{fig:kinect:betaVsAlpha}
-\end{figure}
-
-Charts presented in fig. \ref{fig:kinect:trackingVsAlpha} and fig. \ref{fig:kinect:betaVsAlpha} show measured joints tracking states and the elbow angle (angle $\beta$ in fig. \ref{fig:kinect:rotationAngle}) changes during the rotation respectively. In fig. \ref{fig:kinect:trackingVsAlpha} it is visible that tracking the states of both shoulders joints fluctuate between \emph{Tracked} and \emph{Interferred} states, when subject was rotated more than $50\degree$ ($\alpha > 50\degree$) in relation to Kinect’s camera. It is worth mentioning that even well visible right shoulder joint lost tracking state during that rotation. In fig. \ref{fig:kinect:betaVsAlpha} it can be noticed that estimation of the right elbow angle $\beta$ was unstable for considerable body rotation ($\alpha > 50\degree$), though the hand was fully visible all the time.
-
-\subsection{IMU characteristics}
-IMU devices have been in professional usage from decades. Within the scope of the current study there are two types of sensors that measure inertial forces affecting them: accelerometers and gyroscopes. All experiments presented in this paper were performed with the usage of IvenSense MPU-6050 module, which integrates both these types of inertial devices and a thermometer. Even though the accelerometer and the gyroscope were integrated on a single PCB, their data must be processed individually, as they are affected by the different set of external noises with various frequencies that must be filtered out to make them usable.
-
-An accelerometer is an inertial sensor that measures linear forces, affecting it along device coordinating system axes. Usually, the measurements are defined in relation to the gravity force ($1g \approx 9.81  m/{s^2}$), so it is possible to estimate its linear acceleration during the motion. When the device rests, the theoretically correct measurement should be $1g$ in upward direction and $0g$ in two other directions. However, due to the external noises (mainly high frequency), the resting device measurements are oscillating around theoretical values. Analysis of these oscillations, during calibration, lets design low pass filter\footnote{The Center for Geotechnical Modeling (CGM) at UC Davis,\textit{Signal processing and filtering of raw accelerometer records}, \url{https://goo.gl/jQt49h}}\cite{Wang2011} that would be able to filter out at least major part of these high frequency noises. Accelerometers are also sensitive to operating temperature changes and its influence on sensor’s accuracy was the subject of some researches \cite{Schneider2006, Grigorie1996}. The temperature sensitivity is caused by the architecture of the sensor, which is built of several capacitors, hence the operating temperature has influence on their capacity. During the self conducted experiment the measurement of the g-force was observed when the resting device was heated and then cooled down multiple times in the temperature range $10\degree C - 50\degree C$. The results of this experiment are presented in the fig. \ref{fig:imu:tmep}. This chart shows that the measurement tends to change from under to over estimatation with the temperature change. It is also worth noticing that the measured value of the gravity is up to $4\%$ different than the expected, what may influence the furter results. According to the MPU-6050 specification and results of this experiment, the neutral operating temperature for the considered module is $25\degree C$. Due to the fact that the operating temperature of IMU device, placed on a human body, rises and stabilizes at approx. $30 \degree C$, some sort of compensation is required there. Equation \ref{eq:kinect:gravityTempModel} presents the formula of the measured error.
-
-\begin{equation}
-f(T) = 7*10^-7 T^3 - 5*10^-5 T^2 + 0.0022T + 0.9648
-\label{eq:kinect:gravityTempModel}
-\end{equation}
-
-\begin{figure}[H]
-	\centering
-	\input{Figure6.tex}	
-	\caption{Accelerometer gravity measurements in temperature range $10\degree C - 50\degree C$}
-	\label{fig:imu:tmep}
-\end{figure}
-
-A gyroscope – the second type of inertial sensors – measures its angular velocity in $deg/s$  units. If the sensor is at the resting state, all measurements should equal 0 for each of 3 axes. However, the device suffers from the long-term bias that should be limited (ideally – removed). The analyzed noise has low frequency characteristics, thus appropriate high pass filter\footnote{Peter Cheung, \textit{Impulse response \& digital filters}, \url{https://goo.gl/GkbGHg}}, limiting its influence, should be applied. As MEMS based gyroscope is also built from multiple capacitors, their bias is influenced by the temperature as well. As the distortions have low frequency nature, there was no difference observed for high-pass filtered signals over the temperature range. It meant that no additional compensation has been applied in the discussed method. 
-
-The last problem, identified by the authors, related to IMU devices is the incompleteness of the data provided by these units. To calculate the accurate orientation of the IMU module, data from the accelerometer and the gyroscope (orientation around corresponding axes) should be fused together. The accelerometer allows to calculate orientation around two axes, even though it measures forces along all 3 orthogonal directions. The orientation (or the rotation) around the gravity vector is unmeasurable for such device. Theoretically, the gyroscope should retrieve orientation measures around all 3 directions, however, even the filtered signal, contains some error. Its numerical integration over time results in the significant data drift that makes such measurements useless. An example of the data drift is presented in fig. \ref{fig:imu:drift}. Despite the sensor remaining motionless during the experiment, the estimations based on the numerically integrated data showed that the sensor rotated about $60\degree$ within 2 minutes (about $0.5\degree/s$).
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.8\textwidth]{Figure7.png}
-	\caption{Gyroscope drift for non-moving device}
-	\label{fig:imu:drift}
-\end{figure}
-
-\subsection{Hybrid, orientation based, human limbs motion tracking method}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=5cm]{Figure3.png}
+		\caption{Rotation angle $\alpha$ between the user and Kinect}
+		\label{fig:kinect:rotationAngle}
+	\end{figure}
+	
+	\begin{equation}
+		\label{eq:kinect:bodyRotationAngle}
+		\begin{split}
+			\alpha &= 
+			\begin{cases} 
+				atan(\frac{|p^K_{{Sh}_R,Z} - p^K_{{Sh}_L,Z}|}{|p^K_{{Sh}_R,X} - p^K_{{Sh}_L,X}|} & , |p^K_{{Sh}_R,X} - p^K_{{Sh}_L,X}| \neq 0 \\
+				\frac{\Pi}{2}                                                                    & , |p^K_{{Sh}_R,X} - p^K_{{Sh}_L,X}| = 0    \\		
+			\end{cases}
+		\end{split}
+	\end{equation}
+	
+	There are two possible strategies that Kinect uses when the occlusion happens. Either the device tries to estimate the location of the covered joint or, when it is not able to perform even rough estimation of the joint position, it stops tracking of such joint. The results of self-performed experiments show that considerable occlusions occur when the user is rotated by more than $50\degree$ ($\alpha > 50\degree$). 
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=11cm]{Figure4.png}
+		\caption{Shoulders joints tracking state in relation to body rotation angle $\alpha$}
+		\label{fig:kinect:trackingVsAlpha}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=11cm]{Figure5.png}
+		\caption{Elbow angle $\beta$ estimation in relation to body rotation angle $\alpha$}
+		\label{fig:kinect:betaVsAlpha}
+	\end{figure}
+	
+	Charts presented in fig. \ref{fig:kinect:trackingVsAlpha} and fig. \ref{fig:kinect:betaVsAlpha} show measured joints tracking states and the elbow angle (angle $\beta$ in fig. \ref{fig:kinect:rotationAngle}) changes during the rotation respectively. In fig. \ref{fig:kinect:trackingVsAlpha} it is visible that tracking the states of both shoulders joints fluctuate between \emph{Tracked} and \emph{Interferred} states, when subject was rotated more than $50\degree$ ($\alpha > 50\degree$) in relation to Kinect’s camera. It is worth mentioning that even well visible right shoulder joint lost tracking state during that rotation. In fig. \ref{fig:kinect:betaVsAlpha} it can be noticed that estimation of the right elbow angle $\beta$ was unstable for considerable body rotation ($\alpha > 50\degree$), though the hand was fully visible all the time.
+	
+	\subsection{IMU characteristics}
+	IMU devices have been in professional usage from decades. Within the scope of the current study there are two types of sensors that measure inertial forces affecting them: accelerometers and gyroscopes. All experiments presented in this paper were performed with the usage of IvenSense MPU-6050 module, which integrates both these types of inertial devices and a thermometer. Even though the accelerometer and the gyroscope were integrated on a single PCB, their data must be processed individually, as they are affected by the different set of external noises with various frequencies that must be filtered out to make them usable.
+	
+	An accelerometer is an inertial sensor that measures linear forces, affecting it along device coordinating system axes. Usually, the measurements are defined in relation to the gravity force ($1g \approx 9.81  m/{s^2}$), so it is possible to estimate its linear acceleration during the motion. When the device rests, the theoretically correct measurement should be $1g$ in upward direction and $0g$ in two other directions. However, due to the external noises (mainly high frequency), the resting device measurements are oscillating around theoretical values. Analysis of these oscillations, during calibration, lets design low pass filter\footnote{The Center for Geotechnical Modeling (CGM) at UC Davis,\textit{Signal processing and filtering of raw accelerometer records}, \url{https://goo.gl/jQt49h}}\cite{Wang2011} that would be able to filter out at least major part of these high frequency noises. Accelerometers are also sensitive to operating temperature changes and its influence on sensor’s accuracy was the subject of some researches \cite{Schneider2006, Grigorie1996}. The temperature sensitivity is caused by the architecture of the sensor, which is built of several capacitors, hence the operating temperature has influence on their capacity. During the self conducted experiment the measurement of the g-force was observed when the resting device was heated and then cooled down multiple times in the temperature range $10\degree C - 50\degree C$. The results of this experiment are presented in the fig. \ref{fig:imu:tmep}. This chart shows that the measurement tends to change from under to over estimatation with the temperature change. It is also worth noticing that the measured value of the gravity is up to $4\%$ different than the expected, what may influence the furter results. According to the MPU-6050 specification and results of this experiment, the neutral operating temperature for the considered module is $25\degree C$. Due to the fact that the operating temperature of IMU device, placed on a human body, rises and stabilizes at approx. $30 \degree C$, some sort of compensation is required there. Equation \ref{eq:kinect:gravityTempModel} presents the formula of the measured error.
+	
+	\begin{equation}
+		f(T) = 7*10^-7 T^3 - 5*10^-5 T^2 + 0.0022T + 0.9648
+		\label{eq:kinect:gravityTempModel}
+	\end{equation}
+	
+	\begin{figure}[H]
+		\centering
+		\input{Figure6.tex}	
+		\caption{Accelerometer gravity measurements in temperature range $10\degree C - 50\degree C$}
+		\label{fig:imu:tmep}
+	\end{figure}
+	
+	A gyroscope – the second type of inertial sensors – measures its angular velocity in $deg/s$  units. If the sensor is at the resting state, all measurements should equal 0 for each of 3 axes. However, the device suffers from the long-term bias that should be limited (ideally – removed). The analyzed noise has low frequency characteristics, thus appropriate high pass filter\footnote{Peter Cheung, \textit{Impulse response \& digital filters}, \url{https://goo.gl/GkbGHg}}, limiting its influence, should be applied. As MEMS based gyroscope is also built from multiple capacitors, their bias is influenced by the temperature as well. As the distortions have low frequency nature, there was no difference observed for high-pass filtered signals over the temperature range. It meant that no additional compensation has been applied in the discussed method. 
+	
+	The last problem, identified by the authors, related to IMU devices is the incompleteness of the data provided by these units. To calculate the accurate orientation of the IMU module, data from the accelerometer and the gyroscope (orientation around corresponding axes) should be fused together. The accelerometer allows to calculate orientation around two axes, even though it measures forces along all 3 orthogonal directions. The orientation (or the rotation) around the gravity vector is unmeasurable for such device. Theoretically, the gyroscope should retrieve orientation measures around all 3 directions, however, even the filtered signal, contains some error. Its numerical integration over time results in the significant data drift that makes such measurements useless. An example of the data drift is presented in fig. \ref{fig:imu:drift}. Despite the sensor remaining motionless during the experiment, the estimations based on the numerically integrated data showed that the sensor rotated about $60\degree$ within 2 minutes (about $0.5\degree/s$).
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\textwidth]{Figure7.png}
+		\caption{Gyroscope drift for non-moving device}
+		\label{fig:imu:drift}
+	\end{figure}
+	
+	\subsection{Hybrid, orientation based, human limbs motion tracking method}
 	The problem that motion tracking method needs to face, is to estimate human skeleton selected joint ($j$) position ($P^F_{j,t} = [p^F_{j,x}, p^F_{j,y}, p^F_{j,z}]_t$) within the reference three dimensional coordinating system, in a particular moment of time t. To solve this problem authors propose the novel, hybrid human limbs motion tracking method, based on the continuous linear fusion of skeleton bones orientations (contrary to state-of-art skeleton joints positions fusion) with the respect to the current motion context. It takes into consideration the controllers’ reliability and compensates measurement devices imperfections described in previous chapters. The data fusion method has been splited into several, sequential phases presented on diagram in fig. \ref{fig:methodPhases} and described in the further part of this article. 
-	
+		
 	\begin{minipage}{\linewidth}
-      \centering
-      \begin{minipage}[b]{0.45\linewidth}
-          \begin{figure}[H]
-            	\scalebox{0.5}{
-				\input{Figure8.tex}
-			}
-			\caption{Orientation based data fusion method schema}
-			\label{fig:methodPhases}
-          \end{figure}
-      \end{minipage}
-      	\hfill
-      \begin{minipage}[b]{0.45\linewidth}
-          \begin{figure}[H]
-            \includegraphics[width=0.8\textwidth]{Figure11.png}
-			\caption{The hand joint simplified hierarchical model}		
-			\label{fig:hybrid:jointsHierarchy}	
-          \end{figure}
-      \end{minipage}
-  \end{minipage}
-	
+		\centering
+		\begin{minipage}[b]{0.45\linewidth}
+			\begin{figure}[H]
+				\scalebox{0.45}{
+					\input{Figure8.tex}
+				}
+				\caption{Orientation based data fusion method schema}
+				\label{fig:methodPhases}
+			\end{figure}
+		\end{minipage}
+		\hfill
+		\begin{minipage}[b]{0.45\linewidth}
+			\begin{figure}[H]
+				\includegraphics[width=0.7\textwidth]{Figure11.png}
+				\caption{The hand joint simplified hierarchical model}		
+				\label{fig:hybrid:jointsHierarchy}	
+			\end{figure}
+		\end{minipage}
+	\end{minipage}
+		
 	The discussed novel data fusion method can be presented as a formula in eq. \ref{eq:fusion:formula}.
-	
+		
 	\begin{equation}
 		P^F_{j,t} = f(A,G,T,P_{j-1,t}^K,P_{j,t}^K,\Delta t, P^F_{j-1,t}, P^K_{sh_L,t},P^K_{sh_R,t},l) 
 		\label{eq:fusion:formula}
 	\end{equation}
-	
-The estimation of the selected joint $j$ position ($P^F_{j,t}$) in particular time $t$ is based on the measurements of the accelerometer ($A=[a_x,a_y,a_z]$), the gyroscope ($G=[g_x,g_y,g_z]$) and the positions of the selected joint and its parent, measured by the Kinect controller ($P^K_{j,t} = [p^K_{j,x}, p^K_{j,y}, p^K_{j,z}]_t$, $P^K_{j-1,t} = [p^K_{j,x}, p^K_{j,y}, p^K_{j,z}]_t$). Additionally, to compensate IMU measurements, the current operating temperature $T$ is taken into consideration. The discussed method estimates the joint position with some time interval $\Delta t$ aligned to Microsoft Kinect update interval. IMU are sticked to the body surface, on the bone between the tracked joint $j$ and its parent joint $j-1$. The simplified hierarchical model of the hand, as well as the placement of IMU are presented in fig. \ref{fig:hybrid:jointsHierarchy}.	
-	
+		
+	The estimation of the selected joint $j$ position ($P^F_{j,t}$) in particular time $t$ is based on the measurements of the accelerometer ($A=[a_x,a_y,a_z]$), the gyroscope ($G=[g_x,g_y,g_z]$) and the positions of the selected joint and its parent, measured by the Kinect controller ($P^K_{j,t} = [p^K_{j,x}, p^K_{j,y}, p^K_{j,z}]_t$, $P^K_{j-1,t} = [p^K_{j,x}, p^K_{j,y}, p^K_{j,z}]_t$). Additionally, to compensate IMU measurements, the current operating temperature $T$ is taken into consideration. The discussed method estimates the joint position with some time interval $\Delta t$ aligned to Microsoft Kinect update interval. IMU are sticked to the body surface, on the bone between the tracked joint $j$ and its parent joint $j-1$. The simplified hierarchical model of the hand, as well as the placement of IMU are presented in fig. \ref{fig:hybrid:jointsHierarchy}.	
+		
 	\subsubsection{IMU initialization}
 	The goal of the IMU initialization procedure presented in the fig. \ref{fig:hybrid:IMUCalibration} is to calculate the data ($G, A$) correction factors matrix ($cor = [cor_A \quad cor_G]^T = [[c_ax,c_ay,c_az ]\quad[c_gx,c_gy,c_gz ]]^T $) for each IMU individually. 
-
-		\begin{figure}[!htb]
-	\scalebox{0.55}{		
-		\input{calibrationAlgorithm.tex}
-	}
-	\caption{Diagram of IMU initialization routine}
-	\label{fig:hybrid:IMUCalibration}
-\end{figure}
-
+	
+	\begin{figure}[!htb]
+		\scalebox{0.55}{		
+			\input{calibrationAlgorithm.tex}
+		}
+		\caption{Diagram of IMU initialization routine}
+		\label{fig:hybrid:IMUCalibration}
+	\end{figure}
+	
 	During this calculation, IMU modules must lay down without any motion, in the face-up position, as this is the position, in which we know exactly the expected data ($A_0=[0,0,1]$ for the accelerometer and $G_0=[0,0,0]$ for the gyroscope). However, the ideal values are impossible to achieve due to the noise that cannot be completly removed. Because of that, the calibration routine works iteratively ($s$ -- iteration index) as long as the average IMU measurement errors ($[\overline{A}\quad \overline{G}]^T = [[\overline{a_x},\overline{a_y},\overline{a_z}]\quad[\overline{g_x},\overline{g_y},\overline{g_z}]]^T$) are lower than the defined threshold ($[A_{th}\quad G_{th}]^T = [[a_{x,th},a_{y,th},a_{z,th}]\quad[g_{x,th},g_{y,th},g_{z,th}]]^T$). In this case, a relation of $[\overline{A}\quad \overline{G}]^T \le [A_{th}\quad G_{th}]^T$ is true when each element of the first matrix is lower than the element of the second matrix with exactly the same index. As a result of this calibration method, the matrix $cor$ is calculated, which elements added to the current IMU data, allow to use data with the desired accuracy. 
-	
+		
 	If $[A\quad G]_{s,i}$ is an $i$--th out of the $n$ consecutive IMU device measurements for the iteration $s$, then the average error $[\overline{A}\quad \overline{G}]^T$ is calculated according to eq. \ref{eq:hybrid:IMUCalibration:1}.
-	
+		
 	\begin{equation}
 		\begin{bmatrix} \bar{A} \\ \bar{G} \end{bmatrix}_s =
 		\begin{cases}
@@ -353,9 +353,9 @@ The estimation of the selected joint $j$ position ($P^F_{j,t}$) in particular ti
 		\end{cases}
 		\label{eq:hybrid:IMUCalibration:1}
 	\end{equation}
-
-	Then, the data correction factors matrix $cor$ for single measurement is defined by the equ. \ref{eq:hybrid:IMUCalibration:2}
 	
+	Then, the data correction factors matrix $cor$ for single measurement is defined by the equ. \ref{eq:hybrid:IMUCalibration:2}
+		
 	\begin{equation}
 		\footnotesize
 		cor_s = \begin{bmatrix}cor_A\\ cor_G\end{bmatrix}_s =
@@ -365,21 +365,21 @@ The estimation of the selected joint $j$ position ($P^F_{j,t}$) in particular ti
 		\end{cases}
 		\label{eq:hybrid:IMUCalibration:2}
 	\end{equation}	
-	
+		
 	\subsubsection{IMU data fusion filters initialization}
 	The Madgwick filter \cite{Madgwick2011}, defined with the formula presented in eq. \ref{eq:hybrid:madgwick}, has been used as an IMU module inherent accelerometer and gyroscope data fusion method. 
-	
+		
 	\begin{equation}
 		Q^I=m(A,G,f_m,\Delta t)
 		\label{eq:hybrid:madgwick}
 	\end{equation}
-	
+		
 	This filter estimates the IMU module orientation in the quaternion form ($Q^I$), using accelerometer data ($A$), gyroscope data ($G$) and the filtration factor ($f_m$) based on the gyroscope drift characteristics. The Madgwick filter processes the IMU data with the time interval $\Delta t$. Before the filter can run on the real data, it needs to be initialized to set up its internal parameters correctly. The Madgwick filter initialization requires to run the filter multiple times on the measurements of not-moving accelerometer and gyroscope sensors. During this initialization the filtration factor $f_m$ needs to be set to the relatively high value i.e. 2. After the completion of the initialization process, $f_m$ should be defined according to the average Angle Random Walk (ARW) noise value $\widetilde{\omega}$ that can be calculated with the Allan’s variance\cite{FreescaleSemiconductor2015,Allan1966,Allan1987}. In case of exploited MPU-6050, IMU modules filtration factor $f_m$ is calculated according to the original article \cite{Madgwick2011} equation: $f_m = \sqrt{\frac{3}{4}\widetilde{\omega}}$, and equals $0.082$. 
-	
+		
 	\subsubsection{IMU and Kinect controller data noise correction}
 	The data noise correction is a crucial phase for the data fusion. Its goal is to remove as much noise as possible from the raw data. All methods used in this phase are related to measurement devices characteristics described earlier in this article.\\
 	The first step to improve the IMU module data quality is the accelerometer measurements ($A$) error compensation due to the device operating temperature ($T$). For the neutral temperature ($T_0=25\degree C$) and the correction factor $f_T= 0.0011$, the correction is defined with eq. \ref{eq:hybrid:tempCorrection}. The value of $f_T$ has been estimated in self-conducted experiments.
-	
+		
 	\begin{equation}
 		A'=A/(1+ f_T (T-T_0))
 		\label{eq:hybrid:tempCorrection}
@@ -395,10 +395,10 @@ The estimation of the selected joint $j$ position ($P^F_{j,t}$) in particular ti
 		{P'}_{j,t}^K=f_{LPF} * P_{j,t}^K+(1-f_{LPF}) * {P'}_{j,t-1}^K
 		\label{eq:hybrid:positionCorrection}
 	\end{equation}
-	
+		
 	\subsubsection{IMU and Kinect synchronization}
 	The data fusion of any two signals requires signals alignment in the time domain. This guarantees fusion of samples that were collected in the same time -- synchronically. The goal of IMU and Kinect signals synchronization is to find the time offset $\tau$ between two data streams. To synchronize both signals, they must have the same frequency, so the IMU signal has to be downsampled from 100Hz to 30Hz, which is a nominal frequency of the Kinect controller. The downsampling has been implemented in the form of decimation, where Kinect’s new sample availability defines the time of IMU sample picking. Then, the time offset $\tau$ between the IMU signal $I$ and the Kinect signal $K$ was defined as a time offset argument of the cross-correlation algorithm that gives the maximum value of correlation between these two signals (variable $\tau_{max}$) (eq. \ref{eq:cross-cor:1} and \ref{eq:cross-cor:2}). The value of $\tau_{max}$ is added to the timestamp of IMU samples to align it to the Kinect’s signal.
-	
+		
 	\begin{subequations}
 		\begin{align}
 			(I \ast K)(\tau) & = \int_{-\infty}^{+\infty}I(t)K(t+\tau)dt\label{eq:cross-cor:1}   \\
@@ -406,14 +406,14 @@ The estimation of the selected joint $j$ position ($P^F_{j,t}$) in particular ti
 		\end{align}
 		\label{eq:cross-cor}
 	\end{subequations}
-	
-	
-	
+		
+		
+		
 	\subsubsection{IMU and Kinect data fusion}
 	The data fusion method processes time aligned filtered data and takes into consideration their reliability. The most serious concerns about the quality of data, used within fusion, were related to the data provided by Microsoft Kinect controller. Decision about Kinect’s data quality was based on the several information gathered during the motion. The first one are joints tracking state combined together with their positions estimation noise level. Fully visible joint has its state set to \emph{Tracked} value and its position can be considered as reliable. Otherwise, if the tracking state value is set to \emph{Interferred}, the position estimation noise level must be calculated to check if the value can be treated as reliable or not. In the \emph{Interferred} state, the position of joint is estimated basing more on the predication than direct measurements, so its accuracy might be low and values may differ significantly between consequitive frames (or in short time period). Other parameters taken into consideration are the value of angle $\alpha$ between the user and the camera, and information about tracking state of both shoulder joints. Microsoft Kinect has been designed to track the motion of human who stand frontally to the camera. If user rotate too much, Kinect is not able to track the motion correctly anymore. During self experiments, it turned that the maximum angle between human and the Kinect is $50\degree$. Exceeding this rotation angle value results in unreliable, often random, values of all joints positions. As the the value of angle $\alpha$ is calculated using position values of both shoulder joints, they both should be fully visible (tracking state set to \emph{Tracked}), and their position values estimations should be stable in time. That means the angle measurement variance should be lower than $1.5\degree$, which means there were no rapid changes in shouldes position estimations characteristic for signifiant error in provided data. 
-	
+		
 	If all mentioned conditions were satisfied, signals were fused according to equation \ref{eq:hybrid:reliableFusion}. The novelty of the presented method, in comparison with literature approaches, is that the fused data represents skeleton bones orientations in the form of Euler angles $E = \begin{bmatrix} \phi &  \theta & \psi \end{bmatrix}$, instead of joints resulting positions. Orientations of the bones are estimated from both sources and are represented in form of quaternions. They must be converted to the form of Euler angles before they are fused. The conversion from quaternion to Euler angles form can be found in \cite{Dunn2011}.
-	
+		
 	\begin{equation} E^F_t = 
 		\begin{bmatrix}  \phi^F \\  \theta^F \\  \psi^F \end{bmatrix}_t = 
 		diag(w_\phi,w_\theta,w_\psi)
@@ -422,12 +422,12 @@ The estimation of the selected joint $j$ position ($P^F_{j,t}$) in particular ti
 		\begin{bmatrix}  \phi^K \\  \theta^K \\  \psi^K \end{bmatrix}_t
 		\label{eq:hybrid:reliableFusion}
 	\end{equation}
-	
+		
 	The originally elaborated weights $[w_\phi , w_\theta , w_\psi]$ describe the importance level of IMU measurements. They were based both on the device precision and data completeness, and were defined as $[0.98, 0.05, 0.65]$ respectively. 
-	
+		
 	If Kinect’s data turns out to be unreliable, they cannot be fused with the IMU data. Averaged bones orientation are then estimated based on the previously ($t-1$) fused estimation and current change of IMU orientation, according to equation \ref{eq:hybrid:unreliableFusion}.
-	
-	
+		
+		
 	\begin{equation} 
 		\label{eq:hybrid:unreliableFusion}
 		E^F_t = 
@@ -437,45 +437,45 @@ The estimation of the selected joint $j$ position ($P^F_{j,t}$) in particular ti
 		(\begin{bmatrix}  \phi^I \\  \theta^I \\  \psi^I \end{bmatrix}_t -
 		\begin{bmatrix}  \phi^I \\  \theta^I \\  \psi^I \end{bmatrix}_{t-1})
 	\end{equation}
-	
+		
 	However, in case of Kinect data unreliability, weights $[w_\phi , w_\theta , w_\psi]$ were defined differently. In equation \ref{eq:hybrid:unreliableFusion} these weights were defined as $$[0.98,(1-t_{noise}/10)*0.65,(1-t_{noise}/10)*0.65]$$ where $t_{noise}$ coefficient defines the time, in seconds, that Kinect stayed unreliable and its maximum accepted value was defined to 10s. After this time, estimation of the new bone orientation (only around two axes) stops, until Kinect is available again, and the method privileges the IMU signal.
-	
+		
 	\subsubsection{Joints final position estimation}
 	Final joint position ($P_{j,t}^F$) estimation requires the information regarding the position of joint’s parent in the hierarchical skeleton model ($P_{j-1,t}^F$), fixed length of the bone between current joint and its parent ($l$) and the bone orientation estimation ($E_t^F=[\phi^F,\theta^F,\psi^F]_t$). As a result of data fusion, estimated orientations were presented in the form of Euler angles. However, this representation of orientation may complicate further calculations. To simplify calculations, opposite conversion from Euler angles to quaternion $Q_t^F$, according to the formula described in \cite{Dunn2011}, is required. As the used skeletal model is defined as a herarchical structure, newly estimated joint position must be aligned to the postion of its parent joint. Taking tht into consideration, the final joint position calculation procedure is described with equation \ref{eq:hybrid:positionCalculationForm}.
-	
+		
 	\begin{equation} 	
 		P_{j,t}^F=P_{j-1,t}^F+Q_t^F*[l,0,0]*{Q_t^F}^{-1}     
 		\label{eq:hybrid:positionCalculationForm}              	
 	\end{equation}
-	
+		
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Results}
-	
+		
 	%This section may be divided by subheadings. It should provide a concise and precise description of the experimental results, their interpretation as well as the experimental conclusions that can be drawn.
-	
+		
 	In order to verify the accuracy of elaborated method, several experiments were performed. They were conducted with the Vicon motion capture system, as a source of ground-truth reference data. For 3 subjects hand movements were monitored, being tracked simultaneously with Kinect controller, two IMU attached to hand arm and forearm bones on the skin surface, as well as Vicon tracking system. Each user had to perform 4 exercises, each of them twice with 5 repetitions per single try. Each try started with devices synchronization in the T-Pose and then 5 repetitions of motion began. Exercises focused on horizontal and vertical hand flexion in elbow joint, horizontal hand motion and keeping straight arm in T-pose without motion for at least 60s. All these exercises schemes are presented in figure \ref{fig:results:sequences}.
-	
+		
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=12cm]{Figure8.png}
 		\caption{Movement sequences performed during tests}
 		\label{fig:results:sequences}
 	\end{figure}
-	
+		
 	The accuracy of 3 parameters estimations has been observed: the position of elbow joint, the position of wrist joint and the angle between arm and forearm measured in elbow joint. Those values have been compared with the corresponding parameters estimated with Kalkbrenner’s method \cite{Kalkbrenner2014} which, on the contrary, fused positions rather than orientations, of selected joints. The position estimation error has been defined as root mean squared error ($RMSE$) of Euclidean distance ($d_e$) between joint’s reference position, measured by Vicon motion capture system ($P_j^V$), and joint’s position estimated by two data fusion methods. The first one is the joins position-based Kalkbrenner data fusion method ($P_j^{FP}$) and the second: bones orientation-based fusion method ($P_j^{FO}$) proposed by the authors of this article. The $RMSE$ value has been calculated with equation \ref{eq:results:RMSE} \cite{Armstrong1992}. The error for elbow joint angle $\beta$ estimation has been calculated in the similar way.
-	
+		
 	\begin{equation}
 		{RMSE}^F_j = \sqrt{\frac{1}{n}\sum_{i=1}^{n}{d_e(P^V_{j,i}, P^{Fs}_{j,i})^2}} , s = \{O,P\}
 		\label{eq:results:RMSE}
 	\end{equation}
-	
+		
 	The overall error of both methods, for each test exercise, has been calculated as a mean of $RMSE$ ($\overline{RMSE}$) of each motion tracking session. To compare the Kalkbrenner’s method with authors’ novel method the ratio $r$ between the difference of $\overline{RMSE}$ of both methods to the $\overline{RMSE}$ of Kalkbrenner’s method has been calculated according to the equation \ref{eq:results:comparison} and expressed in the form of percents. The figures \ref{fig:results:positionError:a} and \ref{fig:results:positionError:b} show the summary of  $\overline{RMSE}$ for tracked upper limb joints: elbow and wrist. Above each pair of bars, in these charts, the value of $r$ ratio has been presented. Based on the results, presented in figures \ref{fig:results:positionError:a} and \ref{fig:results:positionError:b}, the improvement of proposed bones orientation-based fusion method, in reference to the best in literature -- Kalkbrenner’s method has been noticed. However, the improvement ratio vary between joints. The error of the elbow joint position estimation has been reduced up to 18\% and the wrist joint position estimation error -- up to 16\%. The difference in improvement ration between these two joints is caused by the fact that elbow joint is closer to the skeleton model root than wrist joint, so it accumulates less asceding joints position estimations errors. Figure \ref{fig:results:elbowAngleError} presents the chart of $\overline{RMSE}$ of elbow angle $\beta$ estimation (calculated similarly to eq. \ref{eq:results:RMSE}). In this value estimation the improvement has been also noticed and its ratio is up to 11\%.
-	
+		
 	\begin{equation}
 		r = \frac{\overline{RMSE^P_j} - \overline{RMSE^O_j}}{\overline{RMSE^P_j}}
 		\label{eq:results:comparison}
 	\end{equation}
-	
+		
 	\begin{figure}[H]
 		\centering
 		\begin{subfigure}[b]{0.49\textwidth}
@@ -493,60 +493,58 @@ The estimation of the selected joint $j$ position ($P^F_{j,t}$) in particular ti
 		\caption{Average root square mean error $\overline{RMSE}$ of elbow (a) and wrist (b) joints position estimation}
 		\label{fig:results:positionError}
 	\end{figure}   
-	
+		
 	\begin{figure}[H]
 		\centering
 		\input{Figure10.tex}
 		\caption{Average root square mean error $\overline{RMSE}$ of elbow flexion angle $\beta$}
 		\label{fig:results:elbowAngleError}
 	\end{figure}
-	
+		
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Discussion}
+		
+	The authors presented a new, orientation-based method for skeleton joints positioning, that compensates devices' imperfections and considers the context of the motion. It was tested on a set of right hand movements demanding for measurement devices. Results were compared with those gathered from the position-based fusion method and the reference, professional, ground-truth Vicon tracking system. Presented results proofs that this new, complex, approach reduces joints position estimation error. The root cause of such estimation improvement, identified by the authors, is related to the bones orientation estimation instability in the postion-based method as well as the inaccuracy of bones length measurements and lack of fixed skeleton model definiton. Moreover, autors found that complementary fusion of the signals measured by both devices, reduces the influence of these source signals imperfections to the final result.
+	In the case of IMU devices, the information about their 3D space orientation (in case of IMU devices sticked to the body this orientation represents the orientation of the bone as well), is default and requires less complex data processing. Estimation of joint position, basing on IMU measurements, requires additional measurement of selected bone length and additional geometric transformations. Due to that, imprecision of the bone orientation estimation as well as lack of accuracy of bone length measurement have inpact on the final joint position estimation error.
+	Considering Microsoft Kinect controler, the human body skeletal model includes information about each bone length. However, these length values are estimated continously and may differ significantly between two consequtive measurement frames. The difference might be even few centimeters. Moreover, if the occlusion doesn't occur, the estimation of the bones orientation turn to be more stable and reliable than the joints position estimation. 
+	According to the mentioned characteristics, Kinect and IMU data fusion based on the information about 3D space orientation reduces the influence of the noticable source of the errors.
 	
-	%Authors should discuss the results and how they can be interpreted in perspective of previous studies and of the working hypotheses. The findings and their implications should be discussed in the broadest context possible. Future research directions may also be highlighted.
-	The presented results show the comparison of estimation errors of two data fusion methods: the well-known method based on joints positions fusion and a new data fusion method based on bones orientations. 3 parameters estimated by both methods: elbow joint position, wrist joint position and elbow angle $\beta$, have been taken into consideration in this comparison: the error of elbow joint position estimation, the error of wrist joint position estimation and the error of the estimation of angle between the arm and the forearm of the tracked hand. The set of motions, used to test these methods, have been chosen to check how methods work when source data are poor quality due to the limitations and imperfections of measurement devices.
+	Taking into consideration characteristics of both measurement devices as well as complex compensation of detectable errors that exists in their data also differentiate proposed method from the already know methods described in publicly available literature. Moreover, they allow to improve the quality of source data before their fusion. It is important that plenty of characteristics described in this article is closely related to the context of performed motion. As an example, the variable accuracy of distance measurement between Kinect and the user or the human rotation angle to the surface of Kinect have impact on the stability and reliability of Kinect's data.
 	
-	The results of error comparison for elbow and wrist joints positions estimations are presented in figures \ref{fig:results:positionError:a} and \ref{fig:results:positionError:b} respectively. Results proof that the author’s novel data fusion method reduces the joints position estimation error, especially during motions that emphasize the imperfections of Microsoft Kinect device (exercises 2 and 3). In controller demanding motions, the most significant improvement, in estimation error, has been noticed - up to 18\% for the elbow position estimation and up to 16\% for the wrist position estimation. In two other motions, the improvement has been noticed as well, however it was slightly less substantial than in the exercises 2 and 3. This shows that the presented orientation-based data fusion method is able to detect the poor Kinect data quality faster than the method proposed by Kalkbrenner and reduce the influence of these data on the selected joint position estimation. 
+	The goal of conducted reserach was to find the hybrid method of human limbs motion tracking, which takse into consideration elaborated characteristics and reduces joints position estimation error significantly. Proposed method, tested on the case of upper limbs motion, met this goal. The results obtained by the authors' method have been compared with the results of the position base data fusion method with the highest declared accuracy. 3 parameters estimated by both methods have been compared: elbow joint position error, wrist joint position error and elbow angle $\beta$ error. The set of motions (fig. \ref{fig:results:sequences}), used to test these methods, have been chosen to check how methods work when source data are poor quality due to the limitations and imperfections of measurement devices.
 	
-	Figure \ref{fig:results:elbowAngleError} shows the results of the elbow angle estimation during the motion. In this parameter, the estimation error reduction has been noticed as well, and the best improvement was close to 11\%. However, in exercises 2 and 3, which might be considered as the most difficult from the data quality detection point of view, the improvement is slighter than in the case of joints position estimation. That means that both methods have similar accuracy of estimation of the body/limbs shape, however, the authors’ method is more accurate in the joints position estimation. The most possible explanation for this, is the fact that the authors’ method uses the fixed bones length definition,while the Kalkbrenner’s method uses the Kinect’s bone length temporary estimation that may vary between subsequent measurement frames.
+	The result of comparison of the elbow joint position estimation error is presented on chart in fig. \ref{fig:results:positionError:a}. It shows that he achieved improvement in this parameter estimation is up to 18\%. Comparison of wrist joint position estimation error is presented on chart in fig. \ref{fig:results:positionError:b} and the improvement of this parameter estimation is slightly lower than the improvement of elbow joint position estimation error and its value is up to 16\%. The difference in these values is caused by the distance between each of these joint and the root of the skeletal model. The joint that is further from the root accumulates existing errors of all joints that are defined between root and himself. That's explains why the improvement of the estimation error is lower for the wrist than for the elbow. Chart presented in fig. \ref{fig:results:elbowAngleError} presents the result of comparison of third parameter which is elbow angle estimation during the motion. The best improvement in this parameter estimation was close to 11\%. However, in exercises 2 and 3, which might be considered as the most difficult from the data quality detection point of view, the improvement is noticalby lower than the best one.
 	
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\section{Conclusions}
-	
-	%This section is not mandatory, but can be added to the manuscript if the discussion is unusually long or complex.
-	
-	The authors presented a new, orientation-based method for skeleton joints positioning, that compensates devices' imperfections and considers the context of the motion. It was tested on a set of right hand movements demanding for measurement devices. Results were compared with those gathered from the position-based fusion method and the reference, professional, ground-truth Vicon tracking system. With the results achieved from the experiments, one can notice the improvement of the elbow positioning accuracy up to 18\%, the wrist positioning up to 16\% and the elbow joint angle estimation accuracy up to 11\%.
 	Obtained results prove that the novel data fusion approach, based on the bones orientation, might be considered as an improved alternative to the well-known, joint position-based methods.
-	
-	
+		
+		
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\vspace{6pt} 
-	
+		
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%% optional
 	%\supplementary{The following are available online at www.mdpi.com/link, Figure S1: title, Table S1: title, Video S1: title.}
-	
+		
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%\acknowledgments{All sources of funding of the study should be disclosed. Please clearly indicate grants that you have received in support of your research work. Clearly state if you received funds for covering the costs to publish in open access.}
-	
+		
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\authorcontributions{G. Glonek designed the method and experiments and analyzed the data; A.Wojciechowski contributed and supervised the work; G. Glonek and A. Wojciechowski wrote the paper.}
-	
+		
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\conflictofinterests{The authors declare no conflict of interest.} 
-	
+		
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%% optional
 	\abbreviations{The following abbreviations are used in this manuscript:\\
-						
+								
 		\noindent 
 		\begin{tabular}{@{}ll}
 			RMSE & Root Mean Squared Error    \\
 			IMU  & Inertial Measurement Units \\
 			LPF  & Low Pass Filter            \\
 		\end{tabular}}
-	
+		
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%% optional
 	%\appendixtitles{no} %Leave argument "no" if all appendix headings stay EMPTY (then no dot is printed after "Appendix A"). If the appendix sections contain a heading then change the argument to "yes".
@@ -554,14 +552,14 @@ The estimation of the selected joint $j$ position ($P^F_{j,t}$) in particular ti
 	%\appendix
 	%\section{}
 	%The appendix is an optional section that can contain details and data supplemental to the main text. For example, explanations of experimental details that would disrupt the flow of the main text, but nonetheless remain crucial to understanding and reproducing the research shown; figures of replicates for experiments of which representative data is shown in the main text can be added here if brief, or as Supplementary data. Mathemtaical proofs of results not central to the paper can be added as an appendix.
-	
+		
 	%\section{}
 	%All appendix sections must be cited in the main text. In the appendixes, Figures, Tables, etc. should be labeled starting with `A', e.g., Figure A1, Figure A2, etc. 
-	
+		
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	% Citations and References in Supplementary files are permitted provided that they also appear in the reference list here. 
 	\bibliographystyle{mdpi}
-	
+		
 	%=====================================
 	% References, variant A: internal bibliography
 	%=====================================
@@ -574,16 +572,16 @@ The estimation of the selected joint $j$ position ($P^F_{j,t}$) in particular ti
 	%\bibitem{ref-book}
 	%Lastname, F.F.; Author, T. The title of the cited contribution. In {\em The Book Title}; Editor, F., Meditor, A., Eds.; Publishing House: City, Country, 2007; pp. 32-58.
 	%\end{thebibliography}
-	
+		
 	%=====================================
 	% References, variant B: external bibliography
 	%=====================================
 	\bibliography{main}
-	
+		
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%% optional
 	%\sampleavailability{Samples of the compounds ...... are available from the authors.}
-	
+		
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
 
