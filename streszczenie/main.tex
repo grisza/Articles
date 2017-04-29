@@ -1,0 +1,84 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage{enumerate}
+\usepackage{polski}
+\usepackage[polish]{babel}
+\usepackage{microtype}
+\usepackage[short]{datetime}
+\usepackage{xparse}
+\usepackage{calc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage[unicode]{hyperref}% unicode is required for unicode pdf metadata
+\usepackage{etoolbox}
+\usepackage[utf8]{inputenc}
+\usepackage[OT4]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{ragged2e}
+
+
+\newcommand*{\student}[3]{\def\@studentTitle{#1}\def\@studentFirstname{#2}\def\@studentLastname{#3}}
+\newcommand*{\supervisor}[3]{\def\@supervisorTitle{#1}\def\@supervisorFirstname{#2}\def\@supervisorLastname{#3}}
+\renewcommand*{\title}[1]{\def\@title{#1}}
+\newcommand*{\thesisTitle}[1]{\def\@thesisTitle{#1}}
+\newcommand*{\thesis}[1]{\def\@thesis{#1}}
+\newcommand*{\location}[1]{\def\@location{#1}}
+\newcommand*\pdfpagemode{UseNone}% 
+
+\newcommand*{\makeheader}{
+	\begin{FlushLeft}
+		\@studentTitle{} \@studentFirstname{} \@studentLastname{} \hfill 	\@location{}, \today \\					
+		Promotor: \@supervisorTitle{} \@supervisorFirstname{} \@supervisorLastname{} 
+	\end{FlushLeft}
+	
+	\vspace*{2cm}
+	\Centering
+	\@title{}\\
+	\vspace*{0.5cm}
+	\textbf{\@thesisTitle{}}\\
+	
+	\vspace*{1.5cm}
+	\justify
+	\textbf{\underline{Teza:}} \textbf{\@thesis{}}
+}
+
+\author{Grzegorz Glonek}
+\title{STRESZCZENIE ROZPRAWY DOKTORSKIEJ}
+\student{mgr inż.}{Grzegorz}{Glonek}
+\supervisor{dr hab. inż.}{Adam}{Wojciechowski}
+\thesisTitle{Hybrydowa metoda sledzenia ruchu człowieka w czasie rzeczywistym}
+\thesis{Zastosowanie autorskiej, hybrydowej metody śledzenia ruchu kończyn człowieka, łączącej dane pochodzące z~sensora głębi i~sensorów inercyjnych, uwzględniającej kontekstowe charakterystyki pracy urządzeń, pozwala na bardziej precyzyjne śledzenie ruchu.}
+\location{Łódź}
+
+\begin{document}	
+	\makeheader
+	\begin{FlushLeft}
+	W rozprawie wyróżniono następujące cele szczegółowe:
+	\begin{enumerate}[1. ]
+		\item zdefiniowanie charakterystyk działania i ograniczeń zastosowanych urządzeń pomiarowych;
+	
+		\item opracowanie i zastosowanie metod kompensacji ujawnionych i mierzalnych ograniczeń zastosowanych urządzeń pomiarowcyh;
+			\item opracowanie autorskiej metody łączenia sygnałów pochodzących z urządzeń pomiarowych: kontrolera Microsoft Kinect i czujników inercyjnych działającej z częstotliwością zbliżoną do częstotliwości pracy kontrolera Kinect tj. $30Hz$ i uwzględniającej kompensację ujawnionych ograniczeń zastosowanych urządzeń pomiarowych;		
+		\item zastosowanie opracowanej metody łączenia sygnałów do śledzenia kończyn wykonujących ruch w tempie charakterystycznym dla ćwiczeń rehabilitacyjnych.
+	\end{enumerate}
+\textbf{Ad. 2}: W celu opracowania metod kompensacji ograniczeń działania wykorzystywanych urządzeń pomiarowych, został wykonany szereg eksperymentów mających na celu ich ujawnienie i opisanie. Wykazane ograniczenia były zazwyczaj pominięte w oficjalnej dokumentacji wykorzystywanych urządzeń. Temat związany ze zbadaniem istotnych ograniczeń i niedokładności w działaniu wspomnianych urządzeń nie był także przedmiotem kompleksowych badań w świetle znanej mi literatury przedmiotu. \\
+
+\textbf{Ad. 3}: Dotychczas opisywane w literaturze metody łączenia danych z kontrolera Microsoft Kinect oraz z urządzeń inercyjnych opierały się na informacji o położeniu wybranych stawów oraz na przetwarzaniu tych informacji za pomocą filtru Kalmana. Niewiele znanych mi publikacji wykorzystuje inny mechanizm łączenia danych niż wspomniane filtry Kalmana. W żadnym z artykulów nie znalazłem opisu wykorzystania innych danych, do łączenia pomiarów z obu źródeł, niż położenia przestrzennego wybranych stawów. \\
+
+\textbf{Ad. 4}: W celu weryfikacji działania opracowanej metody, została ona przetestowana na zestawie ruchów ręki wykonywanych w kierunkach mogących zostać określone jako wymagające dla tych urządzeń pomiarowych. Oznacza to, że w trakcie ich wykonywania zostały uwypuklone ograniczenia kontrolera Microsoft Kinect lub czujników inercyjnych. Ruchy były wykonywane w tempi charakterystycznym dla ćwiczeń rehabilitacyjnych, tak aby nie przekroczyć zdolności rejestracyjnych wspomnianych urządzeń pomiarowych. Gdyby wykorzystać ruchy wykonywane z dużą prędkością, które są charakterystyczne dla treningu sportowego, wówczas należałoby zastosować inne urządzenia pomiarowe charakteryzujące się wyższą częstotliwością pracy. \\
+
+Aby zrealizować cele szczegółowe 1-4, wymienione powyżej, koniecznym okazało się m.in.:
+\begin{enumerate}[1. ]
+	\item kompleksowe zbadanie charakterystyk działania kontrolera Kinect oraz czujników inercyjnych;
+    \item opracowanie metod kompensacji ujawnionych ograniczeń w działaniu wykorzystywanych urządzeń pomiarowych;
+	\item opracowanie autorskiej metody łączenia danych z kontrolera Microsoft Kinect i czujników inercyjnych w oparciu o informacje o obrotach wybranych kości;
+\end{enumerate}
+
+Rozprawa została podzielona na pięć rozdziałów. W rozdziale 1 (str. 11) zostały przedstawione i usystematyzowane podstawowe pojęcia wykorzystywane w dalszej części pracy, sformułowano problem badawczy, cele szczegółowe rozprawy oraz jej tezę, a także uzasadniono motywację podjęcia badań. Rozdział 2 (str. 17) przedstawia aktualny stan wiedzy dotyczący obszaru prowadzonych badań, a także wyniki badań własnych związanych z określeniem charakterystyk działania wykorzystywanych urządzeń pomiarowych. Zagadnieniami poruszonymi w tym rozdziale są systemy śledzenia ruchu, ich taksonomia oraz charakterystyka działania (roz. 2.1), komputerowe modele postaci ludzkiej (roz. 2.2), charakterystyki urządzeń pomiarowych: kontrolera Microsoft Kinect oraz czujników inercyjnych (roz. 2.3). Ostatni z podrozdziałów (roz. 2.4) przedstawia analizę literatury przedmiotu dotyczącą metod łączenia sygnałów pochodzących z optycznych, bezmarkerowych, systemów śledzenia ruchu z sygnałami urządzeń inercyjnych. Podrozdział 2.3 jest realizacją pierwszego celu szczegółowego rozprawy doktorskiej. W rozdziale 3 (str. 79) opisana została autorska, hybrydowa, metoda śledzenia ruchu człowieka łącząca dane pochodzące z kontrolera Microsoft Kinect oraz czujników inercyjnych. Kolejne podrozdziały poświęcone są poszczególnym etapom przetwarzania danych w prezentowanej metodzie. W pierwszym podrozdziale (3.1) opisany jest format danych dostarczanych przez urządzenia pomiarowe, a także opis autorskiego urządzenia pomiarowego wykorzystującego czujniki inercyjne oraz platformę Arduino. Podrozdział 3.2 opisuje autorski algorytm kalibracji czujników inercyjnych oraz procedurę inicjalizacji filtru Madgwicka wykorzystywanego do łączenia sygnałów pochodzących z żyroskopu oraz z akcelerometru. Podrozdział 3.3, będący realizacją drugiego celu szczegółowego, przedstawia metody kompensacji niedoskonałości urządzeń inercyjnych opisanych w rozdziale 2.3. Kolejny podrozdział (3.4) opisuje wykorzystaną metodę na określenie przesunięcia czasowego pomiędzy sygnałami pochodzącymi z czujników inercyjnych oraz z kontrolera Kinect i ich synchronizacji. Ostani podrozdział (3.5) zawiera opis klasyfikacji odbieranych danych ze względu na ich wiarygodność, a tym samym na wybór metody łączenia otrzymanych sygnałóW które to zostały opisane w drugiej części tego podrozdziału. Informacje zawarte w rozdziale 3.5 są realizacją trzeciego z założonych celi szczegółowych. Realizację czwartego z przyjętych celi szczegółowych opisuje rozdział 4 (str. 103) w którym zawarte są opisy przeprowadzonych eksperymentów oraz dyskusja dotycząca otrzymanych wyników. Rozdział 5 (str. 123), będący ostatnim rozdziałem zasadniczym, stanowi podsumowanie rozprawy, zreasumowano w nim wyniki przeprowadzonych badań, sformułowano wnioski oraz wskazano możliwe kierunki rozwoju badań. \\
+Ponadto w pracy znalazły sie dwa rozdziały dodatkowe  majace na celu przedstawienie informacji pomocnych w analizie przedstawionego tematu. Pierwszym z nich (dodatek A, str. 131) jest opis podstawowych filtrów stosowanych do łaczenia sygnałów, a wykorzystywanych w przytoczonych w niniejszej pracy artykułach. Filtrami opisanymi w tym dodatku, w kolejności ich opisu, są filtry Kalmana: liniowy, rozszerzony i bezśladowy, filtr komplementarny oraz filtry Mahoney’a i Madgwicka. W drugim dodatku (dodatek B) znajduje się ogólny opis wyznaczania i zastosowania wariancji Allana, będacej narzędziem pozwalającym na analizę charakterystyki szumów występujących w elektronicznych urządzeniach pomiarowych, m.in. w czujnikach inercyjnych.\\
+
+Dodatkowo rozprawę rozpoczyna wykaz użytych skrótów i symboli, a kończą bibliografia oraz spisy tabel i rysunków
+
+
+	\end{FlushLeft}
+\end{document}
