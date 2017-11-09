@@ -48,17 +48,17 @@ Another important characteristic is that joints positions measurement accuracy c
 The studied paper \cite{Obdrzalek2012} estimates Microsoft Kinect general posture estimation variability in range 5 -- 10 cm. Moreover, the author pointed out that the length of tracked bones vary between measurement frames in range 2 -- 5 cm.\\
 
 \begin{figure}[H]
-	%\centering   
-	%\includegraphics[width=0.45\textwidth]{Fig01.eps}
-	\vspace{2.5cm}
+	\centering   
+	\includegraphics[width=0.45\textwidth]{Fig01.eps}
+	%\vspace{2.5cm}
 	\caption{Position measurement accuracy in Z-axis to distance from the Kinect}
 	\label{fig:kinectDist}
 \end{figure}
 
 \begin{figure}[H]
-	%\centering 
-	%\includegraphics[width=0.45\textwidth]{Fig02.eps}
-	\vspace{2.5cm}
+	\centering 
+	\includegraphics[width=0.45\textwidth]{Fig02.eps}
+	%\vspace{2.5cm}
 	\caption{Gravity measurement in temperature range $10\degree C - 50\degree C$}
 	\label{fig:imuTemp}
 \end{figure}
@@ -70,9 +70,9 @@ The newest method that could be qualified to this group is the one presented in 
 Another group of published methods based on the assumption that both measurement devices imperfections need to be corrected continuously by the signal fusion. In 2014 Feng and Murray-Smith \cite{Murray-Smith2014} proposed multi-rate Kalman filter based fusion method of joints positions, estimated by Kinect with linear acceleration and velocity of this joint. Presented results showed that this approach stabilizes measurements around real value much faster that single rate KF. This was visible especially when movemnt starts/stops (figure \ref{fig:feng-Stabilization}). The accuracy of presented method can be estimated around 1.5 -- 2cm (based on published diagrams). However presented results refer to very short time periods (up to 5s) so it is impossible to estimate how method works in a long time.\\
 
 \begin{figure}[!htb]
-	%\centering 
-	%\includegraphics[width=0.45\textwidth]{Fig03.eps}
-	\vspace{2.5cm}
+	\centering 
+	\includegraphics[width=0.45\textwidth]{Fig03.eps}
+	%\vspace{2.5cm}
 	\caption{Joint position estimation with the multi-rate Kalman filter and the single rate Kalman filter\cite{Murray-Smith2014}. Red line - multi-rate Kalman filter, blue line - single-rate Kalman filter}
 	\label{fig:feng-Stabilization}
 \end{figure}
@@ -105,9 +105,9 @@ Orientations are contextually presented in two forms: quaternions and Euler angl
 In the proposed method, data gathered from measurement devices, are denoised in the first step and then used to calculate bones orientations. Then, orientations calculated from IMU devices and measured by Kinect are fused together and at the last step, bones length model is added to estimate absolute joints positioins. General overview of orientation-based fusion process is presented on figure \ref{fig:orientationBasedMethod}.
  
 \begin{figure}[!htb]
-	%\centering 
-	%\includegraphics[width=0.9\textwidth]{Fig04.eps}
-	\vspace{2.5cm}
+	\centering 
+	\includegraphics[width=0.9\textwidth]{Fig04.eps}
+	%\vspace{2.5cm}
 	\caption{Orientation based fusion method}
 	\label{fig:orientationBasedMethod}
 \end{figure}
@@ -156,9 +156,9 @@ where:
 The $\alpha$ factor value has been estimated as a result of the analysis of the average Kinect positioning error during hand motion sequence (presented in figure \ref{fig:lowPass}).
 
 \begin{figure}[!htb]
-	%\centering 
-	%\includegraphics[width=0.45\textwidth]{Fig05.eps}
-	\vspace{2.5cm}
+	\centering 
+	\includegraphics[width=0.45\textwidth]{Fig05.eps}
+	%\vspace{2.5cm}
 	\caption{Kinect measurement accuracy to low-pass filter factor $\alpha$}
 	\label{fig:lowPass}
 \end{figure}
@@ -168,25 +168,25 @@ Both devices work in different coordination spaces (figure \ref{fig:coordination
 \begin{figure}[!htb]
 	%\centering 
 	\begin{minipage}[b]{0.45\linewidth}
-		%\centering 
+		\centering 
 		
-		%\includegraphics[width=\textwidth]{Fig06.eps}
-		\vspace{2.5cm}
+		\includegraphics[width=\textwidth]{Fig06.eps}
+		%\vspace{2.5cm}
 		\caption{Kinect skeleton joints positions and IMU location}
 		\label{fig:skeleton}
 	\end{minipage}
 	\begin{minipage}[b]{0.45\linewidth}
-		%\centering 
+		\centering 
 		\subfigure[Kinect]
 		{
-			%\includegraphics[width=40mm]{Fig07.eps}
-			\vspace{2.5cm}
+			\includegraphics[width=40mm]{Fig07.eps}
+			%\vspace{2.5cm}
 			\label{fig:kinectCoordinationSpace}
 		}
 		\subfigure[IMU]
 		{
-			%\includegraphics[width=25mm]{Fig08.eps}
-			\vspace{2.5cm}
+			\includegraphics[width=25mm]{Fig08.eps}
+			%\vspace{2.5cm}
 			\label{fig:imuCoordinationSpace}
 		}
 		\caption{Devices coordination spaces}
@@ -211,14 +211,14 @@ where:
 	\centering 
 	\subfigure[Not occluded joint]
 	{
-		%\includegraphics[width=0.45\textwidth]{Fig09.eps}
-		\vspace{2.5cm}
+		\includegraphics[width=0.45\textwidth]{Fig09.eps}
+		%\vspace{2.5cm}
 		\label{fig:hpfNotOccluded}
 	}
 	\subfigure[Occluded joint]
 	{
-		%\includegraphics[width=0.45\textwidth]{Fig10.eps}
-		\vspace{2.5cm}
+		\includegraphics[width=0.45\textwidth]{Fig10.eps}
+		%\vspace{2.5cm}
 		\label{fig:hpfOccluded}
 	}
 	\caption{High-pass filter (eq. \ref{eq:hpf}) results for joint position while joint is not occluded in any time (\ref{fig:hpfNotOccluded}) and partially occluded (\ref{fig:hpfOccluded})}
@@ -271,9 +271,9 @@ When the controllers fused orientation was estimated it must be recalculated to 
 \section{Results}
 In order to verify elaborated method (orientation-based joints position estimation) precision several experiments were performed. They were conducted with the VICON motion capture system as a source of a ground-truth reference data. Five users were monitored simultaneously with Kinect controller, two IMUs attached to hand arm and forearm bones (fig. \ref{fig:skeleton}) and passive marker-based VICON system. Markers were attached hand according to schema presented in figure \ref{fig:viconArm}.\\
 \begin{figure}[H]
-	%\centering
-	%\includegraphics[width=0.6\textwidth]{Fig11.eps}
-	\vspace{2.5cm}
+	\centering
+	\includegraphics[width=0.6\textwidth]{Fig11.eps}
+	%\vspace{2.5cm}
 	\caption[VICON arm marker schema]{Used VICON Arm marker model.\footnotemark}
 	\label{fig:viconArm}
 \end{figure}
@@ -288,9 +288,9 @@ Performed experiments examined the right hand joints (elbow, wrist) positioning 
 \end{enumerate}
 
 \begin{figure}[!htb]
-	%\centering
-	%\includegraphics[width=0.35\textwidth]{Fig12.eps}
-	\vspace{2.5cm}
+	\centering
+	\includegraphics[width=0.35\textwidth]{Fig12.eps}
+	%\vspace{2.5cm}
 	\caption{Movement sequences performed during tests.}
 	\label{fig:poses}
 \end{figure}
@@ -305,15 +305,15 @@ The position estimation accuracy for elbow and wrist joints as well as the angle
 	\centering
 	\begin{minipage}[b]{0.49\linewidth}
 		\centering   
-		%\includegraphics[width=\textwidth]{Fig13.eps}
-		\vspace{2.5cm}
+		\includegraphics[width=\textwidth]{Fig13.eps}
+		%\vspace{2.5cm}
 		\caption{Elbow positioning average accuracy}
 		\label{fig:positionElbow}
 	\end{minipage}
 	\begin{minipage}[b]{0.49\linewidth}
 		\centering 
-		%\includegraphics[width=\textwidth]{Fig14.eps}
-		\vspace{2.5cm}
+		\includegraphics[width=\textwidth]{Fig14.eps}
+		%\vspace{2.5cm}
 		\caption{Wrist positioning average accuracy}
 		\label{fig:positionWrist}
 	\end{minipage}
@@ -321,9 +321,9 @@ The position estimation accuracy for elbow and wrist joints as well as the angle
 \end{figure}
 
 \begin{figure}[!htb]
-	%\centering 
-	%\includegraphics[width=0.45\textwidth]{Fig15.eps}
-	\vspace{2.5cm}
+	\centering 
+	\includegraphics[width=0.45\textwidth]{Fig15.eps}
+	%\vspace{2.5cm}
 	\caption{Elbow angle measurement average accuracy}
 	\label{fig:angleError}
 \end{figure}

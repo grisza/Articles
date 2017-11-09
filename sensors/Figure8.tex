@@ -20,7 +20,7 @@
 		\node [block, below=of inSync, xshift=3.5cm, yshift=1.2cm] (block4) {IMU and Kinect synchronization}; 
 		\node [block, below=of inSync, xshift=-3.5cm, yshift=1.2cm] (block5) {IMU and Kinect data fusion}; 
 		\node [block, below=of inSync, yshift=-1.3cm] (block6) {Joints final position estimation};    
-		\node [decision, below=of block6] (isEnd) {Is user finished session?}; 
+		\node [decision, below=of block6] (isEnd) {Has user finished session?}; 
 		\node [start, left=of isEnd] (stop) {Stop};
 	\end{scope}
 	% connect all nodes defined above
